@@ -33,9 +33,7 @@ C:\Users\MaxMcAzuki\Documents\Visual Studio 2015\Projects\Platformer\Platformer\
 C:\Users\MaxMcAzuki\Documents\Visual Studio 2015\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\Fantasy Tileset.xnb
 C:\Users\MaxMcAzuki\Documents\Visual Studio 2015\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\Level4.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\Arial.xnb
-C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\enemy.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\Fantasy Tileset.xnb
-C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\hero.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\Level1.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\Level4.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Platformer.exe
@@ -63,3 +61,4 @@ C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\obj\x
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\obj\x86\Debug\Platformer.exe
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\obj\x86\Debug\Platformer.pdb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\Tileset.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\walk.xnb
