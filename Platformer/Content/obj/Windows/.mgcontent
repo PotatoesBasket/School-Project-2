@@ -4,11 +4,12 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/enemy.png</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/Arial.spritefont</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/Level1.tmx</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/Level4.tmx</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/Fantasy Tileset.png</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/Tileset.png</File>
-    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/walk.png</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/hero.png</File>
   </SourceFiles>
 </SourceFileCollection>

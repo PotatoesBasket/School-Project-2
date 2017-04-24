@@ -38,10 +38,7 @@ namespace Platformer
 
         public void Load(ContentManager content)
         {
-            AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
-            animation.Load(content, "walk", 12, 20);
-
-            sprite.Add(animation, 0, -5);
+            sprite.Load(content, "hero");
         }
 
 
