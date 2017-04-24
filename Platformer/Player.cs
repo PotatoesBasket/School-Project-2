@@ -42,6 +42,7 @@ namespace Platformer
             animation.Load(content, "walk", 12, 20);
 
             sprite.Add(animation, 0, -5);
+            sprite.Pause();
         }
 
 
@@ -69,6 +70,8 @@ namespace Platformer
             if (Keyboard.GetState().IsKeyDown(Keys.Left) == true)
             {
                 acceleration.X -= Game1.acceleration;
+                sprite.SetFlipped(true);
+                sprite.Play();
             }
             else if (wasMovingLeft == true)
             {
@@ -78,6 +81,8 @@ namespace Platformer
             if (Keyboard.GetState().IsKeyDown(Keys.Right) == true)
             {
                 acceleration.X += Game1.acceleration;
+                sprite.SetFlipped(false);
+                sprite.Play();
             }
             else if (wasMovingRight == true)
             {
@@ -98,6 +103,7 @@ namespace Platformer
             if ((wasMovingLeft && (velocity.X > 0)) || (wasMovingRight && (velocity.X < 0)))
             {
                 velocity.X = 0;
+                sprite.Pause();
             }
 
             int tx = game.PixelToTile(sprite.position.X);
@@ -138,6 +144,7 @@ namespace Platformer
                 {
                     sprite.position.X = game.TileToPixel(tx);
                     this.velocity.X = 0;
+                    sprite.Pause();
                 }
             }
             else if (this.velocity.X < 0)
@@ -146,6 +153,7 @@ namespace Platformer
                 {
                     sprite.position.X = game.TileToPixel(tx + 1);
                     this.velocity.X = 0;
+                    sprite.Pause();
                 }
             }
 

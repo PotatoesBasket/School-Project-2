@@ -18,6 +18,8 @@ namespace Platformer
 
         int currentAnimation = 0;
 
+        SpriteEffects effects = SpriteEffects.None;
+
         public Sprite()
         {
         }
@@ -37,7 +39,28 @@ namespace Platformer
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            animations[currentAnimation].DrawFrame(spriteBatch, position + animationOffsets[currentAnimation]);
+            animations[currentAnimation].DrawFrame(spriteBatch, position + animationOffsets[currentAnimation], effects);
+        }
+
+
+        public void SetFlipped(bool state)
+        {
+            if (state == true)
+                effects = SpriteEffects.FlipHorizontally;
+            else
+                effects = SpriteEffects.None;
+        }
+
+
+        public void Pause()
+        {
+            animations[currentAnimation].Pause();
+        }
+
+
+        public void Play()
+        {
+            animations[currentAnimation].Play();
         }
     }
 }
