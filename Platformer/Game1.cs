@@ -21,8 +21,7 @@ namespace Platformer
         public static float friction = maxVelocity.X * 6;
         public static float jumpImpulse = meter * 1500;
 
-        Player player = null;        Enemy enemy = new Enemy();
-
+        Player player = null;
         Camera2D camera = null;
         TiledMap map = null;
         TiledTileLayer collisionLayer;
@@ -64,7 +63,6 @@ namespace Platformer
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             player.Load(Content);
-            enemy.Load(Content);
 
             var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenWidth, ScreenHeight);
 
@@ -93,7 +91,6 @@ namespace Platformer
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             player.Update(deltaTime);
-            enemy.Update(deltaTime);
             camera.Position = player.Posistion - new Vector2(ScreenWidth / 2, ScreenHeight / 2);
 
             base.Update(gameTime);
@@ -110,7 +107,7 @@ namespace Platformer
 
             map.Draw(spriteBatch);
             player.Draw(spriteBatch);
-            enemy.Draw(spriteBatch);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
