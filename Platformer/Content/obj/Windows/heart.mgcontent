@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/walk.png</SourceFile>
-  <SourceTime>2017-05-03T16:08:45.8140182+10:00</SourceTime>
-  <DestFile>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/bin/Windows/walk.xnb</DestFile>
-  <DestTime>2017-05-03T16:08:59.2032254+10:00</DestTime>
+  <SourceFile>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/heart.png</SourceFile>
+  <SourceTime>2017-05-03T12:17:28.8002259+10:00</SourceTime>
+  <DestFile>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/bin/Windows/heart.xnb</DestFile>
+  <DestTime>2017-05-03T16:08:59.1881852+10:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-02T01:05:36+10:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

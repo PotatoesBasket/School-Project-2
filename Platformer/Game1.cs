@@ -12,19 +12,22 @@ namespace Platformer
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteFont arialFont;
+        SpriteFont ventureFont;
+        Texture2D heart = null;
+        Player player = null;        Camera2D camera = null;
+        TiledMap map = null;
+        TiledTileLayer collisionLayer;
 
-        public static int tile = 64;
+        int score = 0;
+        int lives = 3;
+        public static int tile = 48;
         public static float meter = tile;
         public static float gravity = meter * 9.8f * 4.0f;
         public static Vector2 maxVelocity = new Vector2(meter * 10, meter * 15);
         public static float acceleration = maxVelocity.X * 2;
         public static float friction = maxVelocity.X * 6;
-        public static float jumpImpulse = meter * 1500;
-
-        Player player = null;
-        Camera2D camera = null;
-        TiledMap map = null;
-        TiledTileLayer collisionLayer;
+        public static float jumpImpulse = meter * 750;
 
         public int ScreenWidth
         {
@@ -52,8 +55,6 @@ namespace Platformer
 
         protected override void Initialize()
         {
-            player = new Player(this);
-
             base.Initialize();
         }
 
@@ -62,18 +63,33 @@ namespace Platformer
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            player.Load(Content);
+            ventureFont = Content.Load<SpriteFont>("3Dventure");
+            arialFont = Content.Load<SpriteFont>("arial");
+            heart = Content.Load<Texture2D>("heart");
 
             var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenWidth, ScreenHeight);
 
             camera = new Camera2D(viewportAdapter);
             camera.Position = new Vector2(0, ScreenHeight);
 
-            map = Content.Load<TiledMap>("Level1");
+            map = Content.Load<TiledMap>("test");
             foreach (TiledTileLayer layer in map.TileLayers)
             {
-                if (layer.Name == "Collisions")
+                if (layer.Name == "collision")
                     collisionLayer = layer;
+            }
+
+            foreach (TiledObjectGroup group in map.ObjectGroups)
+            {
+                if (group.Name == "player_spawn")
+                {
+                    foreach (TiledObject obj in group.Objects)
+                    {
+                        player = new Player(this);
+                        player.Load(Content);
+                        player.Posistion = new Vector2(obj.X, obj.Y);
+                    }
+                }
             }
         }
         
@@ -99,15 +115,21 @@ namespace Platformer
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             var transformMatrix = camera.GetViewMatrix();
 
             spriteBatch.Begin(transformMatrix: transformMatrix);
-
             map.Draw(spriteBatch);
             player.Draw(spriteBatch);
+            spriteBatch.End();
 
+            spriteBatch.Begin();
+            spriteBatch.DrawString(ventureFont, "Score : " + score.ToString(), new Vector2(20, 20), Color.White);
+            for (int i = 0; i < lives; i++)
+            {
+                spriteBatch.Draw(heart, new Vector2(ScreenWidth - 30 - i * 20, 20), Color.White);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);

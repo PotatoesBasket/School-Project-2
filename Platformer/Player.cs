@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -23,8 +24,13 @@ namespace Platformer
         public Vector2 Posistion
         {
             get { return sprite.position; }
+            set { sprite.position = value; }
         }
 
+        public Rectangle Bounds
+        {
+            get { return sprite.Bounds; }
+        }
 
         public Player(Game1 game)
         {
@@ -35,23 +41,21 @@ namespace Platformer
             position = Vector2.Zero;
         }
 
-
         public void Load(ContentManager content)
         {
             AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
-            animation.Load(content, "walk", 12, 20);
+            animation.Load(content, "walk", 5, 10);
 
-            sprite.Add(animation, 0, -5);
+            sprite.Add(animation, 12, 6);
             sprite.Pause();
-        }
 
+        }
 
         public void Update(float deltaTime)
         {
             UpdateInput(deltaTime);
             sprite.Update(deltaTime);
         }
-
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -64,7 +68,6 @@ namespace Platformer
             bool wasMovingLeft = velocity.X < 0;
             bool wasMovingRight = velocity.X > 0;
             bool falling = isFalling;
-
             Vector2 acceleration = new Vector2(0, Game1.gravity);
 
             if (Keyboard.GetState().IsKeyDown(Keys.Left) == true)
@@ -159,6 +162,5 @@ namespace Platformer
 
             this.isFalling = !(celldown || (nx && celldiag));
         }
-
     }
 }

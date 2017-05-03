@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/Tileset.png</SourceFile>
-  <SourceTime>2016-03-17T14:20:22+10:00</SourceTime>
-  <DestFile>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/bin/Windows/Tileset.xnb</DestFile>
-  <DestTime>2017-04-19T11:01:08.8257796+10:00</DestTime>
+  <SourceFile>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/tileset.png</SourceFile>
+  <SourceTime>2017-05-03T13:18:53.0475386+10:00</SourceTime>
+  <DestFile>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/bin/Windows/tileset.xnb</DestFile>
+  <DestTime>2017-05-03T16:08:59.2794623+10:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-02T01:05:36+10:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

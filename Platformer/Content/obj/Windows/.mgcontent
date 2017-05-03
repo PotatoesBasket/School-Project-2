@@ -4,11 +4,15 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/Arial.spritefont</File>
-    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/Level1.tmx</File>
-    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/Level4.tmx</File>
-    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/Fantasy Tileset.png</File>
-    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/Tileset.png</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/intro_map.tmx</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/tileset3.png</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/3Dventure.spritefont</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/pleasework.tmx</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/tiledsucks.tmx</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/heart.png</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/walk.png</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/tileset.png</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/arial.spritefont</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/test.tmx</File>
   </SourceFiles>
 </SourceFileCollection>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="48" tileheight="48" nextobjectid="2">
+ <tileset firstgid="1" name="tileset" tilewidth="48" tileheight="48" tilecount="169" columns="13">
+  <image source="tileset.png" trans="000000" width="624" height="624"/>
+ </tileset>
+ <layer name="notcollision" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMBKEb3r/myugCCaumqqqqqqqqqqqqqqqqqqqqvj44D0AB
+  </data>
+ </layer>
+ <layer name="collision" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJzt1LEJAEAIBEE7sP9uDT59c+FmwAKWA6sAAAAAAAAAAJ5eLsWvNbnf/vrT+pP/HwAAAAAAADcMMNwBPA==
+  </data>
+ </layer>
+ <objectgroup name="player_spawn">
+  <object id="1" x="978" y="1682"/>
+ </objectgroup>
+</map>
