@@ -44,9 +44,8 @@ namespace Platformer
         public void Load(ContentManager content)
         {
             AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
-            animation.Load(content, "walk", 5, 10);
-
-            sprite.Add(animation, 12, 6);
+            animation.Load(content, "player_walk_x48", 4, 10);
+            sprite.Add(animation, 4, -12);
             sprite.Pause();
 
         }
@@ -61,7 +60,6 @@ namespace Platformer
         {
             sprite.Draw(spriteBatch);
         }
-
 
         private void UpdateInput(float deltaTime)
         {

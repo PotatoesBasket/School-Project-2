@@ -5,6 +5,7 @@ using MonoGame.Extended;
 using MonoGame.Extended.Maps.Tiled;
 using MonoGame.Extended.ViewportAdapters;
 using System;
+using System.Collections.Generic;
 
 namespace Platformer
 {
@@ -12,16 +13,17 @@ namespace Platformer
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
         SpriteFont arialFont;
         SpriteFont ventureFont;
         Texture2D heart = null;
-        Player player = null;        Camera2D camera = null;
+        Player player = null;        List<Enemy> enemies = new List<Enemy>();        Goal goal = null;        Camera2D camera = null;
         TiledMap map = null;
         TiledTileLayer collisionLayer;
 
         int score = 0;
         int lives = 3;
-        public static int tile = 48;
+        public static int tile = 32;
         public static float meter = tile;
         public static float gravity = meter * 9.8f * 4.0f;
         public static Vector2 maxVelocity = new Vector2(meter * 10, meter * 15);
@@ -65,7 +67,7 @@ namespace Platformer
 
             ventureFont = Content.Load<SpriteFont>("3Dventure");
             arialFont = Content.Load<SpriteFont>("arial");
-            heart = Content.Load<Texture2D>("heart");
+            heart = Content.Load<Texture2D>("heart_x16");
 
             var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenWidth, ScreenHeight);
 
@@ -90,6 +92,27 @@ namespace Platformer
                         player.Posistion = new Vector2(obj.X, obj.Y);
                     }
                 }
+
+                if (group.Name == "enemy_spawn")
+                {
+                    foreach (TiledObject obj in group.Objects)
+                    {
+                        Enemy enemy = new Enemy(this);
+                        enemy.Load(Content);
+                        enemy.Position = new Vector2(obj.X, obj.Y);
+                        enemies.Add(enemy);
+                    }
+                }
+
+                if (group.Name == "goal")
+                {
+                    foreach (TiledObject obj in group.Objects)
+                    {
+                        goal = new Goal(this);
+                        goal.Load(Content);
+                        goal.Position = new Vector2(obj.X, obj.Y);
+                    }
+                }
             }
         }
         
@@ -107,8 +130,12 @@ namespace Platformer
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             player.Update(deltaTime);
-            camera.Position = player.Posistion - new Vector2(ScreenWidth / 2, ScreenHeight / 2);
+            foreach (Enemy e in enemies)
+            {
+                e.Update(deltaTime);
+            }
 
+            camera.Position = player.Posistion - new Vector2(ScreenWidth / 2.15f, ScreenHeight / 1.5f);
             base.Update(gameTime);
         }
 
@@ -122,6 +149,11 @@ namespace Platformer
             spriteBatch.Begin(transformMatrix: transformMatrix);
             map.Draw(spriteBatch);
             player.Draw(spriteBatch);
+            foreach (Enemy e in enemies)
+            {
+                e.Draw(spriteBatch);
+            }
+            goal.Draw(spriteBatch);
             spriteBatch.End();
 
             spriteBatch.Begin();

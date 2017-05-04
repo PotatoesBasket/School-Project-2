@@ -4,15 +4,15 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/intro_map.tmx</File>
-    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/tileset3.png</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/3Dventure.spritefont</File>
-    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/pleasework.tmx</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/tiledsucks.tmx</File>
-    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/heart.png</File>
-    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/walk.png</File>
-    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/tileset.png</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/arial.spritefont</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/test.tmx</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/tileset32x32.png</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/heart_x16.png</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/player_walk_x48.png</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/ghost_walk_x48.png</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/player_stand_x48.png</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/jett_loaf_x48.png</File>
   </SourceFiles>
 </SourceFileCollection>

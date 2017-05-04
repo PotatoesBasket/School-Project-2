@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="48" tileheight="48" nextobjectid="2">
- <tileset firstgid="1" name="tileset" tilewidth="48" tileheight="48" tilecount="169" columns="13">
-  <image source="tileset.png" trans="000000" width="624" height="624"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" nextobjectid="7">
+ <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32" tilecount="169" columns="13">
+  <image source="tileset32x32.png" trans="000000" width="416" height="416"/>
  </tileset>
  <layer name="notcollision" width="64" height="64">
   <data encoding="base64" compression="zlib">
@@ -10,10 +10,23 @@
  </layer>
  <layer name="collision" width="64" height="64">
   <data encoding="base64" compression="zlib">
-   eJzt1LEJAEAIBEE7sP9uDT59c+FmwAKWA6sAAAAAAAAAAJ5eLsWvNbnf/vrT+pP/HwAAAAAAADcMMNwBPA==
+   eJzt2LENwCAQA0A2YP9tKdKGCqR83neSBzAvUXgMAAAAAAAAAIDH3CTFW9fk/u6vf1r/5P8PAAAAoJuTbef2LvTFzpTe/0SH/pXe/G/9K91/t1uLSP8sUy0Q/w==
   </data>
  </layer>
+ <layer name="hazard" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAIADB7aP+cPl4mENlgEQAAAAAAAAAAAAAAAAAA8FPOWgEuakZZAKc=
+  </data>
+ </layer>
+ <objectgroup color="#00aa00" name="goal">
+  <object id="5" x="982" y="1904"/>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="enemy_spawn">
+  <object id="2" x="876" y="1868"/>
+  <object id="3" x="1112" y="1880"/>
+  <object id="4" x="374" y="1882"/>
+ </objectgroup>
  <objectgroup name="player_spawn">
-  <object id="1" x="978" y="1682"/>
+  <object id="1" x="584.788" y="1795.27"/>
  </objectgroup>
 </map>
