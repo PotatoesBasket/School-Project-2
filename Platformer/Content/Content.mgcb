@@ -23,11 +23,6 @@
 /processorParam:TextureFormat=Compressed
 /build:3Dventure.spritefont
 
-#begin tiledsucks.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:tiledsucks.tmx
-
 #begin arial.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

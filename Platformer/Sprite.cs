@@ -57,16 +57,19 @@ namespace Platformer
                 effects = SpriteEffects.None;
         }
 
-
         public void Pause()
         {
             animations[currentAnimation].Pause();
         }
 
-
         public void Play()
         {
             animations[currentAnimation].Play();
+        }
+
+        public void Reset()
+        {
+            animations[currentAnimation].Reset();
         }
     }
 }

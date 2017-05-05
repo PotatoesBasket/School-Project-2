@@ -35,14 +35,13 @@ namespace Platformer
         public void Load(ContentManager content)
         {
             AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
-            animation.Load(content, "jett_loaf_x48", 2, 10);
+            animation.Load(content, "jett_loaf_x48", 2, 1);
             sprite.Add(animation, 0, 0);
         }
 
         public void Update(float deltaTime)
         {
             sprite.Update(deltaTime);
-            sprite.Play();
         }
 
         public void Draw(SpriteBatch spriteBatch)

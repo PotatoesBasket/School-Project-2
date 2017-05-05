@@ -17,7 +17,7 @@ namespace Platformer
         SpriteFont arialFont;
         SpriteFont ventureFont;
         Texture2D heart = null;
-        Player player = null;        List<Enemy> enemies = new List<Enemy>();        Goal goal = null;        Camera2D camera = null;
+        Goal goal = null;        Player player = null;        List<Enemy> enemies = new List<Enemy>();        Camera2D camera = null;
         TiledMap map = null;
         TiledTileLayer collisionLayer;
 
@@ -33,19 +33,12 @@ namespace Platformer
 
         public int ScreenWidth
         {
-            get
-            {
-                return graphics.GraphicsDevice.Viewport.Width;
-            }
+            get { return graphics.GraphicsDevice.Viewport.Width; }
         }
-
 
         public int ScreenHeight
         {
-            get
-            {
-                return graphics.GraphicsDevice.Viewport.Height;
-            }
+            get { return graphics.GraphicsDevice.Viewport.Height; }
         }
 
         public Game1()
@@ -54,12 +47,10 @@ namespace Platformer
             Content.RootDirectory = "Content";
         }
 
-
         protected override void Initialize()
         {
             base.Initialize();
         }
-
 
         protected override void LoadContent()
         {
@@ -68,13 +59,12 @@ namespace Platformer
             ventureFont = Content.Load<SpriteFont>("3Dventure");
             arialFont = Content.Load<SpriteFont>("arial");
             heart = Content.Load<Texture2D>("heart_x16");
+            map = Content.Load<TiledMap>("test");
 
             var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenWidth, ScreenHeight);
-
             camera = new Camera2D(viewportAdapter);
             camera.Position = new Vector2(0, ScreenHeight);
 
-            map = Content.Load<TiledMap>("test");
             foreach (TiledTileLayer layer in map.TileLayers)
             {
                 if (layer.Name == "collision")
@@ -115,12 +105,10 @@ namespace Platformer
                 }
             }
         }
-        
 
         protected override void UnloadContent()
         {
         }
-
 
         protected override void Update(GameTime gameTime)
         {
@@ -128,17 +116,23 @@ namespace Platformer
                 Exit();
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            camera.Position = player.Posistion - new Vector2(ScreenWidth / 2.15f, ScreenHeight / 1.5f);
 
+            if (lives == 0)
+            {
+                lives = 3;
+            }
+
+            CheckCollisions();
+            goal.Update(deltaTime);
             player.Update(deltaTime);
             foreach (Enemy e in enemies)
             {
                 e.Update(deltaTime);
             }
 
-            camera.Position = player.Posistion - new Vector2(ScreenWidth / 2.15f, ScreenHeight / 1.5f);
             base.Update(gameTime);
         }
-
 
         protected override void Draw(GameTime gameTime)
         {
@@ -173,12 +167,10 @@ namespace Platformer
             return (int)Math.Floor(pixelCoord / tile);
         }
 
-
         public int TileToPixel(int tileCoord)
         {
             return tile * tileCoord;
         }
-
 
         public int CellAtPixelCoord(Vector2 pixelCoords)
         {
@@ -189,7 +181,6 @@ namespace Platformer
             return CellAtTileCoord(PixelToTile(pixelCoords.X), PixelToTile(pixelCoords.Y));
         }
 
-
         public int CellAtTileCoord(int tx, int ty)
         {
             if (tx < 0 || tx >= map.Width || ty < 0)
@@ -198,6 +189,61 @@ namespace Platformer
                 return 0;
             TiledTile tile = collisionLayer.GetTile(tx, ty);
             return tile.Id;
+        }
+
+
+        public void CheckCollisions()
+        {
+            foreach (Enemy e in enemies)
+            {
+                if (IsColliding(player.Bounds, e.Bounds) == true)
+                {
+                    if (player.IsJumping && player.Velocity.Y > 0)
+                    {
+                        player.JumpOnCollision();
+                        enemies.Remove(e);
+                        break;
+                    }
+                    else
+                    {
+                        lives -= 1;
+                        foreach (TiledObjectGroup group in map.ObjectGroups)
+                        {
+                            if (group.Name == "player_spawn")
+                            {
+                                foreach (TiledObject obj in group.Objects)
+                                {
+                                    player.Posistion = new Vector2(obj.X, obj.Y);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (IsColliding(player.Bounds, goal.Bounds) == true)
+            {
+                foreach (TiledObjectGroup group in map.ObjectGroups)
+                {
+                    if (group.Name == "player_spawn")
+                    {
+                        foreach (TiledObject obj in group.Objects)
+                        {
+                            player.Posistion = new Vector2(obj.X, obj.Y);
+                        }
+                    }
+                }
+            }
+        }
+
+        public bool IsColliding(Rectangle rect1, Rectangle rect2)
+        {
+            if (rect1.X + rect1.Width < rect2.X || rect1.X > rect2.X + rect2.Width ||
+                rect1.Y + rect1.Height < rect2.Y || rect1.Y > rect2.Y + rect2.Height)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
