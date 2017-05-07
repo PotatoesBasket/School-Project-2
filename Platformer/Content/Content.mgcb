@@ -107,3 +107,8 @@
 /processorParam:TextureFormat=Color
 /build:jett_loaf_x48.png
 
+#begin level1.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:level1.tmx
+

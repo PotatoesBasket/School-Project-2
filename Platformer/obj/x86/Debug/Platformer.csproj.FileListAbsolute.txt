@@ -66,3 +66,4 @@ C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\W
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\ghost_walk_x48.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\player_stand_x48.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\jett_loaf_x48.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\level1.xnb

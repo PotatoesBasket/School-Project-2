@@ -78,7 +78,7 @@ namespace Platformer
         }
 
 
-        private void UpdateInput(float deltaTime)
+        public void UpdateInput(float deltaTime)
         {
             bool wasMovingLeft = velocity.X < 0;
             bool wasMovingRight = velocity.X > 0;

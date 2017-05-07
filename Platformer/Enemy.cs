@@ -68,6 +68,7 @@ namespace Platformer
 
                 if (moveRight)
                 {
+                    sprite.SetFlipped(true);
                     if (celldiag && !cellright)
                     {
                         ddx = ddx + ghostAcceleration;
@@ -79,9 +80,9 @@ namespace Platformer
                         this.pause = 0.5f;
                     }
                 }
-
-                if (!this.moveRight)
+                else
                 {
+                    sprite.SetFlipped(false);
                     if (celldown && !cell)
                     {
                         ddx = ddx - ghostAcceleration;

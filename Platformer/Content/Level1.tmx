@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="64" tileheight="64" nextobjectid="1">
- <tileset firstgid="1" name="Tileset" tilewidth="64" tileheight="64">
-  <image source="Tileset.png" width="512" height="576"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="99" height="99" tilewidth="32" tileheight="32" nextobjectid="13">
+ <tileset firstgid="1" name="tileset32x32" tilewidth="32" tileheight="32" tilecount="169" columns="13">
+  <image source="tileset32x32.png" trans="000000" width="416" height="416"/>
  </tileset>
- <layer name="Collisions" width="20" height="20">
+ <layer name="collision" width="99" height="99">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFpAI5KpunNmoeBrAEYjsqmofPHis0uwZ7+Omh8WF+wIYJhSE2/+MDKsQ7kyh7SXHrYAJcQMyNBZMLhIBYGgumtnm40gkhbAPE2lgwADaxDDg=
+   eJzt1UGKw0AMBVGvfIDc/7DZKkE0DqT9K1EJCoZZTGS9DD6P4zgNk5OfO23T37cpdXfXgWHx7qBH3uJ8+9lyFnXSO06pu7sWDItu0jtOaXV/LRgWddI7Tqm7uxYMi27SO05pdX8tGBZ10jtOqbu7FgyLbtI7Tml1fy0YFnXSO06pu7sWDItu0jtOaXV/LRgWddI7Tqm7uxYMi27SO05pdX8tGBZ10jtOqbu7FgyLbtI7Tml1fy0YFnXSO06pu7sWDItu0jtOaXV/LRgWddI7/krfnh1/899nl4Xz+ey20Pn6+H/BmR3vmyu/3/GuS79zKV2ZnZ+dfn5aCQctPvO44zPTz03tUbrLP/3MpgUtLThpwUkLTlpw0oKTFpy04KQFJy04acFJC05acNKCkxactOCkBSctOGnBSQtOWnDSgpMWnLTgpAUnLThpwUkLTlpw0oKTFpy04KQFJy04acFJC05acNKCkxactOCkBSctOGnBSQtOWnDSgpMWnLTgpAUnLThpwUkLTv9m4eQn/R2w156hLM/N
   </data>
  </layer>
+ <objectgroup color="#0000ff" name="checkpoint">
+  <object id="6" x="454.545" y="996.97" width="33.3333" height="351.515"/>
+  <object id="8" x="1403.03" y="1033.33" width="30.303" height="287.879"/>
+ </objectgroup>
+ <objectgroup color="#00ff00" name="goal">
+  <object id="10" x="1345.45" y="1075.76"/>
+ </objectgroup>
+ <objectgroup color="#ff0000" name="enemy_spawn">
+  <object id="11" x="1542.42" y="1081.82"/>
+ </objectgroup>
+ <objectgroup color="#ffff00" name="player_spawn">
+  <object id="1" x="263.636" y="1200"/>
+ </objectgroup>
 </map>

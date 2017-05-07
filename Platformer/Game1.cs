@@ -20,8 +20,10 @@ namespace Platformer
         Goal goal = null;        Player player = null;        List<Enemy> enemies = new List<Enemy>();        Camera2D camera = null;
         TiledMap map = null;
         TiledTileLayer collisionLayer;
+        TiledTileLayer hazardLayer;
 
-        int score = 0;
+        float score = 0;
+        float timer = 500;
         int lives = 3;
         public static int tile = 32;
         public static float meter = tile;
@@ -39,7 +41,8 @@ namespace Platformer
         public int ScreenHeight
         {
             get { return graphics.GraphicsDevice.Viewport.Height; }
-        }
+        }
+
 
         public Game1()
         {
@@ -59,7 +62,7 @@ namespace Platformer
             ventureFont = Content.Load<SpriteFont>("3Dventure");
             arialFont = Content.Load<SpriteFont>("arial");
             heart = Content.Load<Texture2D>("heart_x16");
-            map = Content.Load<TiledMap>("test");
+            map = Content.Load<TiledMap>("level1");
 
             var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenWidth, ScreenHeight);
             camera = new Camera2D(viewportAdapter);
@@ -69,6 +72,9 @@ namespace Platformer
             {
                 if (layer.Name == "collision")
                     collisionLayer = layer;
+
+                if (layer.Name == "hazard")
+                    hazardLayer = layer;
             }
 
             foreach (TiledObjectGroup group in map.ObjectGroups)
@@ -116,7 +122,11 @@ namespace Platformer
                 Exit();
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            camera.Position = player.Posistion - new Vector2(ScreenWidth / 2.15f, ScreenHeight / 1.5f);
+
+            camera.Position = player.Posistion - new Vector2(ScreenWidth / 2, ScreenHeight / 1.5f);
+            CameraMechanics();
+            
+            timer -= deltaTime;
 
             if (lives == 0)
             {
@@ -142,19 +152,20 @@ namespace Platformer
 
             spriteBatch.Begin(transformMatrix: transformMatrix);
             map.Draw(spriteBatch);
+            goal.Draw(spriteBatch);
             player.Draw(spriteBatch);
             foreach (Enemy e in enemies)
             {
                 e.Draw(spriteBatch);
             }
-            goal.Draw(spriteBatch);
             spriteBatch.End();
 
             spriteBatch.Begin();
-            spriteBatch.DrawString(ventureFont, "Score : " + score.ToString(), new Vector2(20, 20), Color.White);
+            spriteBatch.DrawString(ventureFont, "Score : " + score.ToString("f0"), new Vector2(20, 10), Color.White);
+            spriteBatch.DrawString(ventureFont, timer.ToString("f0"), new Vector2((ScreenWidth / 2), 10), Color.White);
             for (int i = 0; i < lives; i++)
             {
-                spriteBatch.Draw(heart, new Vector2(ScreenWidth - 30 - i * 20, 20), Color.White);
+                spriteBatch.Draw(heart, new Vector2(ScreenWidth - 30 - i * 20, 10), Color.White);
             }
             spriteBatch.End();
 
@@ -191,7 +202,6 @@ namespace Platformer
             return tile.Id;
         }
 
-
         public void CheckCollisions()
         {
             foreach (Enemy e in enemies)
@@ -200,6 +210,7 @@ namespace Platformer
                 {
                     if (player.IsJumping && player.Velocity.Y > 0)
                     {
+                        score += 10;
                         player.JumpOnCollision();
                         enemies.Remove(e);
                         break;
@@ -207,32 +218,17 @@ namespace Platformer
                     else
                     {
                         lives -= 1;
-                        foreach (TiledObjectGroup group in map.ObjectGroups)
-                        {
-                            if (group.Name == "player_spawn")
-                            {
-                                foreach (TiledObject obj in group.Objects)
-                                {
-                                    player.Posistion = new Vector2(obj.X, obj.Y);
-                                }
-                            }
-                        }
+                        Respawn();
                     }
                 }
             }
 
             if (IsColliding(player.Bounds, goal.Bounds) == true)
             {
-                foreach (TiledObjectGroup group in map.ObjectGroups)
-                {
-                    if (group.Name == "player_spawn")
-                    {
-                        foreach (TiledObject obj in group.Objects)
-                        {
-                            player.Posistion = new Vector2(obj.X, obj.Y);
-                        }
-                    }
-                }
+                lives = 3;
+                score += timer;
+                timer = 500;
+                Respawn();
             }
         }
 
@@ -244,6 +240,71 @@ namespace Platformer
                 return false;
             }
             return true;
+        }
+
+        public void CameraMechanics()
+        {
+            var cameraLeft = camera.Position.X;
+            var cameraTop = camera.Position.Y;
+            var cameraRight = camera.Position.X + ScreenWidth;
+            var cameraBottom = camera.Position.Y + ScreenHeight;
+            var pX = player.Posistion.X - ScreenWidth / 2;
+            var pY = player.Posistion.Y - ScreenHeight / 1.5f;
+
+            if (cameraLeft < 0 && cameraTop > 0 && cameraBottom < map.HeightInPixels)
+            {
+                camera.Position = new Vector2(0, pY);
+            }
+            if (cameraRight > map.WidthInPixels && cameraTop > 0 && cameraBottom < map.HeightInPixels)
+            {
+                camera.Position = new Vector2(map.WidthInPixels - ScreenWidth, pY);
+            }
+            if (cameraTop < 0 && cameraLeft > 0 && cameraRight < map.WidthInPixels)
+            {
+                camera.Position = new Vector2(pX, 0);
+            }
+            if (cameraBottom > map.HeightInPixels && cameraLeft > 0 && cameraRight < map.WidthInPixels)
+            {
+                camera.Position = new Vector2(pX, map.HeightInPixels - ScreenHeight);
+            }
+
+            if (cameraLeft < 0 && cameraTop < 0)
+            {
+                camera.Position = new Vector2(0, 0);
+            }
+            if (cameraLeft < 0 && cameraBottom > map.HeightInPixels)
+            {
+                camera.Position = new Vector2(0, map.HeightInPixels - ScreenHeight);
+            }
+            if (cameraRight > map.WidthInPixels && cameraTop < 0)
+            {
+                camera.Position = new Vector2(map.WidthInPixels - ScreenWidth, 0);
+            }
+            if (cameraRight > map.WidthInPixels && cameraBottom > map.HeightInPixels)
+            {
+                camera.Position = new Vector2(map.WidthInPixels - ScreenWidth, map.HeightInPixels - ScreenHeight);
+            }
+        }
+
+        public void Respawn()
+        {
+            foreach (TiledObjectGroup group in map.ObjectGroups)
+            {
+                if (group.Name == "player_spawn")
+                {
+                    foreach (TiledObject obj in group.Objects)
+                    {
+                        player.Posistion = new Vector2(obj.X, obj.Y);
+                    }
+                }
+            }
+
+            if (lives == 0)
+            {
+                lives = 3;
+                score = 0;
+                timer = 500;
+            }
         }
     }
 }
