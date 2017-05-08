@@ -13,8 +13,8 @@ namespace Platformer
 {
     class Enemy
     {
-        Sprite sprite = new Sprite();
         Game1 game = null;
+        Sprite sprite = new Sprite();
         Vector2 velocity = Vector2.Zero;
 
         float pause = 0;

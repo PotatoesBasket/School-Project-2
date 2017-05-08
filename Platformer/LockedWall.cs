@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace Platformer
 {
-    class Goal
+    class LockedWall
     {
         Game1 game = null;
         Sprite sprite = new Sprite();
@@ -27,7 +25,8 @@ namespace Platformer
             get { return sprite.Bounds; }
         }
 
-        public Goal(Game1 game)
+
+        public LockedWall(Game1 game)
         {
             this.game = game;
         }
@@ -35,13 +34,18 @@ namespace Platformer
         public void Load(ContentManager content)
         {
             AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
-            animation.Load(content, "jett_loaf_x48", 2, 1);
+            animation.Load(content, "lock_x32", 3, 10);
             sprite.Add(animation, 0, 0);
         }
 
         public void Update(float deltaTime)
         {
             sprite.Update(deltaTime);
+            sprite.Pause();
+            if (game.ShowKey == false)
+            {
+                sprite.Play();
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

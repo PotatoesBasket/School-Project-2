@@ -14,16 +14,16 @@
   </data>
  </layer>
  <objectgroup color="#7d7d7d" name="lock">
-  <object id="19" x="912.121" y="1133.33"/>
-  <object id="20" x="912.121" y="1163.64"/>
-  <object id="21" x="915.152" y="1200"/>
-  <object id="22" x="915.152" y="1233.33"/>
+  <object id="19" x="928.121" y="1120.33"/>
+  <object id="20" x="928.121" y="1151.64"/>
+  <object id="21" x="928.152" y="1184"/>
+  <object id="22" x="928.152" y="1216.33"/>
  </objectgroup>
  <objectgroup color="#ffffff" name="key">
   <object id="13" x="687.879" y="1221.21"/>
  </objectgroup>
  <objectgroup color="#00ff00" name="goal">
-  <object id="10" x="1001" y="1227.25"/>
+  <object id="10" x="992" y="1227.25"/>
  </objectgroup>
  <objectgroup color="#ff0000" name="enemy_spawn">
   <object id="11" x="1312.12" y="1206.06"/>

@@ -17,14 +17,14 @@ namespace Platformer
         SpriteFont arialFont;
         SpriteFont ventureFont;
         Texture2D heart = null;
-        Goal goal = null;        Player player = null;        List<Enemy> enemies = new List<Enemy>();        Camera2D camera = null;
+        Goal goal = null;        Player player = null;        List<Enemy> enemies = new List<Enemy>();        List<LockedWall> lockedWalls = new List<LockedWall>();        Key key = null;        Camera2D camera = null;
         TiledMap map = null;
         TiledTileLayer collisionLayer;
-        TiledTileLayer hazardLayer;
 
         float score = 0;
         float timer = 500;
         int lives = 3;
+        bool showKey = true;
         public static int tile = 32;
         public static float meter = tile;
         public static float gravity = meter * 9.8f * 4.0f;
@@ -41,6 +41,11 @@ namespace Platformer
         public int ScreenHeight
         {
             get { return graphics.GraphicsDevice.Viewport.Height; }
+        }
+
+        public bool ShowKey
+        {
+            get { return showKey; }
         }
 
 
@@ -106,6 +111,25 @@ namespace Platformer
                         goal.Position = new Vector2(obj.X, obj.Y);
                     }
                 }
+
+                if (group.Name == "key")
+                    foreach (TiledObject obj in group.Objects)
+                    {
+                        key = new Key(this);
+                        key.Load(Content);
+                        key.Position = new Vector2(obj.X, obj.Y);
+                    }
+
+                if (group.Name == "lock")
+                {
+                    foreach (TiledObject obj in group.Objects)
+                    {
+                        LockedWall lockedWall = new LockedWall(this);
+                        lockedWall.Load(Content);
+                        lockedWall.Position = new Vector2(obj.X, obj.Y);
+                        lockedWalls.Add(lockedWall);
+                    }
+                }
             }
         }
 
@@ -125,12 +149,17 @@ namespace Platformer
             
             timer -= deltaTime;
 
-            CheckCollisions();
+            CheckCollisions(deltaTime);
             goal.Update(deltaTime);
             player.Update(deltaTime);
+            key.Update(deltaTime);
             foreach (Enemy e in enemies)
             {
                 e.Update(deltaTime);
+            }
+            foreach (LockedWall lw in lockedWalls)
+            {
+                lw.Update(deltaTime);
             }
 
             base.Update(gameTime);
@@ -147,9 +176,11 @@ namespace Platformer
             goal.Draw(spriteBatch);
             player.Draw(spriteBatch);
             foreach (Enemy e in enemies)
-            {
                 e.Draw(spriteBatch);
-            }
+            foreach (LockedWall lw in lockedWalls)
+                lw.Draw(spriteBatch);
+            if (showKey == true)
+                key.Draw(spriteBatch);
             spriteBatch.End();
 
             spriteBatch.Begin();
@@ -194,8 +225,21 @@ namespace Platformer
             return tile.Id;
         }
 
-        public void CheckCollisions()
+        public void CheckCollisions(float deltaTime)
         {
+            foreach (LockedWall lw in lockedWalls)
+            {
+                if (IsColliding(player.Bounds, lw.Bounds) == true)
+                {
+                    player.Stop();
+                }
+                if (showKey == false)
+                {
+                    lockedWalls.Remove(lw);
+                    break;
+                }
+            }
+
             foreach (Enemy e in enemies)
             {
                 if (IsColliding(player.Bounds, e.Bounds) == true)
@@ -212,6 +256,11 @@ namespace Platformer
                         RespawnDie();
                     }
                 }
+            }
+
+            if (IsColliding(player.Bounds, key.Bounds) == true)
+            {
+                showKey = false;
             }
 
             if (IsColliding(player.Bounds, goal.Bounds) == true)

@@ -13,11 +13,13 @@ namespace Platformer
 {
     class Player
     {
-        Sprite walk = new Sprite();
         Game1 game = null;
+        Sprite walk = new Sprite();
         bool isFalling = true;
         bool isJumping = false;
         bool autoJump = true;
+        bool allowMovement = true;
+        float timer = 0;
 
         Vector2 velocity = Vector2.Zero;
         Vector2 position = Vector2.Zero;
@@ -41,11 +43,6 @@ namespace Platformer
         public bool IsJumping
         {
             get { return isJumping; }
-        }
-
-        public void JumpOnCollision()
-        {
-            autoJump = true;
         }
 
 
@@ -78,6 +75,11 @@ namespace Platformer
         }
 
 
+        public void JumpOnCollision()
+        {
+            autoJump = true;
+        }
+
         public void UpdateInput(float deltaTime)
         {
             bool wasMovingLeft = velocity.X < 0;
@@ -85,7 +87,7 @@ namespace Platformer
             bool falling = isFalling;
             Vector2 acceleration = new Vector2(0, Game1.gravity);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left) == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Left) && allowMovement == true)
             {
                 acceleration.X -= Game1.acceleration;
                 walk.SetFlipped(true);
@@ -101,7 +103,7 @@ namespace Platformer
                 walk.Reset();
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Right) == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Right) && allowMovement == true)
             {
                 acceleration.X += Game1.acceleration;
                 walk.SetFlipped(false);
@@ -117,7 +119,7 @@ namespace Platformer
                 walk.Reset();
             }
 
-            if ((Keyboard.GetState().IsKeyDown(Keys.Up) == true && this.isJumping == false && falling == false) || autoJump == true)
+            if ((Keyboard.GetState().IsKeyDown(Keys.Up) && allowMovement == true && this.isJumping == false && falling == false) || autoJump == true)
             {
                 autoJump = false;
                 acceleration.Y -= Game1.jumpImpulse;
@@ -186,6 +188,12 @@ namespace Platformer
             }
 
             this.isFalling = !(celldown || (nx && celldiag));
+        }
+
+        public void Stop()
+        {
+            if (velocity.X > 0)
+                velocity.X -= Game1.maxVelocity.X;
         }
     }
 }
