@@ -59,7 +59,6 @@ C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\obj\x
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\3Dventure.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\arial.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\Level1_old.xnb
-C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\test.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\tileset32x32.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\heart_x16.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\player_walk_x48.xnb
@@ -67,3 +66,18 @@ C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\W
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\player_stand_x48.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\jett_loaf_x48.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\level1.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\enemy.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\Fantasy Tileset.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\heart.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\hero.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\intro_map.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\level1_back.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\Level4.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\movingplatform_x32.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\pleasework.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\tiledsucks.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\Tileset.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\tileset3.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\walk.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\key_x32.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\lock_x32.xnb

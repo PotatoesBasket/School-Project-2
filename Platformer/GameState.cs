@@ -1,26 +1,31 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Maps.Tiled;
 using MonoGame.Extended.ViewportAdapters;
-using System;
-using System.Collections.Generic;
 
 namespace Platformer
 {
-    public class Game1 : Game
+    public class GameState : AIE.State
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        Game1 game = null;
+        bool isLoaded = false;
 
+        SpriteBatch spriteBatch;
         SpriteFont arialFont;
         SpriteFont ventureFont;
         Texture2D heart = null;
         Goal goal = null;        Player player = null;        List<Enemy> enemies = new List<Enemy>();        Camera2D camera = null;
         TiledMap map = null;
+        TiledMap mapBG = null;
         TiledTileLayer collisionLayer;
-        TiledTileLayer hazardLayer;
 
         float score = 0;
         float timer = 500;
@@ -35,95 +40,89 @@ namespace Platformer
 
         public int ScreenWidth
         {
-            get { return graphics.GraphicsDevice.Viewport.Width; }
+            get { return game.GraphicsDevice.Viewport.Width; }
         }
 
         public int ScreenHeight
         {
-            get { return graphics.GraphicsDevice.Viewport.Height; }
+            get { return game.GraphicsDevice.Viewport.Height; }
         }
 
 
-        public Game1()
+        public GameState(Game1 game) : base()
         {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            this.game = game;
         }
 
-        protected override void Initialize()
+        public override void Update(ContentManager Content, GameTime gameTime)
         {
-            base.Initialize();
-        }
-
-        protected override void LoadContent()
-        {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            ventureFont = Content.Load<SpriteFont>("3Dventure");
-            arialFont = Content.Load<SpriteFont>("arial");
-            heart = Content.Load<Texture2D>("heart_x16");
-            map = Content.Load<TiledMap>("level1");
-
-            var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, ScreenWidth, ScreenHeight);
-            camera = new Camera2D(viewportAdapter);
-            camera.Position = new Vector2(0, ScreenHeight);
-
-            foreach (TiledTileLayer layer in map.TileLayers)
+            if (isLoaded == false)
             {
-                if (layer.Name == "collision")
-                    collisionLayer = layer;
+                isLoaded = true;
+                spriteBatch = new SpriteBatch(game.GraphicsDevice);
+
+                ventureFont = Content.Load<SpriteFont>("3Dventure");
+                arialFont = Content.Load<SpriteFont>("arial");
+                heart = Content.Load<Texture2D>("heart_x16");
+                map = Content.Load<TiledMap>("level1");
+                mapBG = Content.Load<TiledMap>("level1_back");
+
+                var viewportAdapter = new BoxingViewportAdapter(game.Window, game.GraphicsDevice, ScreenWidth, ScreenHeight);
+                camera = new Camera2D(viewportAdapter);
+                camera.Position = new Vector2(0, ScreenHeight);
+
+                foreach (TiledTileLayer layer in map.TileLayers)
+                {
+                    if (layer.Name == "collision")
+                        collisionLayer = layer;
+                }
+
+                foreach (TiledObjectGroup group in map.ObjectGroups)
+                {
+                    if (group.Name == "player_spawn")
+                    {
+                        foreach (TiledObject obj in group.Objects)
+                        {
+                            player = new Player(this);
+                            player.Load(Content);
+                            player.Posistion = new Vector2(obj.X, obj.Y);
+                        }
+                    }
+
+                    if (group.Name == "enemy_spawn")
+                    {
+                        foreach (TiledObject obj in group.Objects)
+                        {
+                            Enemy enemy = new Enemy(this);
+                            enemy.Load(Content);
+                            enemy.Position = new Vector2(obj.X, obj.Y);
+                            enemies.Add(enemy);
+                        }
+                    }
+
+                    if (group.Name == "goal")
+                    {
+                        foreach (TiledObject obj in group.Objects)
+                        {
+                            goal = new Goal(this);
+                            goal.Load(Content);
+                            goal.Position = new Vector2(obj.X, obj.Y);
+                        }
+                    }
+                }
             }
-
-            foreach (TiledObjectGroup group in map.ObjectGroups)
-            {
-                if (group.Name == "player_spawn")
-                {
-                    foreach (TiledObject obj in group.Objects)
-                    {
-                        player = new Player(this);
-                        player.Load(Content);
-                        player.Posistion = new Vector2(obj.X, obj.Y);
-                    }
-                }
-
-                if (group.Name == "enemy_spawn")
-                {
-                    foreach (TiledObject obj in group.Objects)
-                    {
-                        Enemy enemy = new Enemy(this);
-                        enemy.Load(Content);
-                        enemy.Position = new Vector2(obj.X, obj.Y);
-                        enemies.Add(enemy);
-                    }
-                }
-
-                if (group.Name == "goal")
-                {
-                    foreach (TiledObject obj in group.Objects)
-                    {
-                        goal = new Goal(this);
-                        goal.Load(Content);
-                        goal.Position = new Vector2(obj.X, obj.Y);
-                    }
-                }
-            }
-        }
-
-        protected override void UnloadContent()
-        {
-        }
-
-        protected override void Update(GameTime gameTime)
-        {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             camera.Position = player.Posistion - new Vector2(ScreenWidth / 2, ScreenHeight / 1.5f);
             CameraMechanics();
-            
+
             timer -= deltaTime;
+
+            if (lives == 0)
+            {
+                lives = 3;
+            }
 
             CheckCollisions();
             goal.Update(deltaTime);
@@ -132,20 +131,17 @@ namespace Platformer
             {
                 e.Update(deltaTime);
             }
-
-            base.Update(gameTime);
         }
 
-        protected override void Draw(GameTime gameTime)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            GraphicsDevice.Clear(Color.Black);
-
             var transformMatrix = camera.GetViewMatrix();
 
             spriteBatch.Begin(transformMatrix: transformMatrix);
+            mapBG.Draw(spriteBatch);
             map.Draw(spriteBatch);
-            goal.Draw(spriteBatch);
             player.Draw(spriteBatch);
+            goal.Draw(spriteBatch);
             foreach (Enemy e in enemies)
             {
                 e.Draw(spriteBatch);
@@ -160,8 +156,18 @@ namespace Platformer
                 spriteBatch.Draw(heart, new Vector2(ScreenWidth - 30 - i * 20, 10), Color.White);
             }
             spriteBatch.End();
+        }
 
-            base.Draw(gameTime);
+        public override void CleanUp()
+        {
+            isLoaded = false;
+            spriteBatch = null;
+            ventureFont = null;
+            arialFont = null;
+            heart = null;
+            map = null;
+            mapBG = null;
+            camera = null;
         }
 
 
@@ -308,12 +314,6 @@ namespace Platformer
             if (lives > 0)
             {
                 lives -= 1;
-            }
-            if (lives == 0)
-            {
-                lives = 3;
-                timer = 500;
-                score = 0;
             }
         }
     }

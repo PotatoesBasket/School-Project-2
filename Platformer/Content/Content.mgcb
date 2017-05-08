@@ -30,11 +30,6 @@
 /processorParam:TextureFormat=Compressed
 /build:arial.spritefont
 
-#begin test.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:test.tmx
-
 #begin tileset32x32.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -111,4 +106,28 @@
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
 /build:level1.tmx
+
+#begin key_x32.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:key_x32.png
+
+#begin lock_x32.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:lock_x32.png
 
