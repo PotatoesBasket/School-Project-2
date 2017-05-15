@@ -149,7 +149,7 @@ namespace Platformer
             
             timer -= deltaTime;
 
-            CheckCollisions(deltaTime);
+            CheckCollisions();
             goal.Update(deltaTime);
             player.Update(deltaTime);
             key.Update(deltaTime);
@@ -225,7 +225,7 @@ namespace Platformer
             return tile.Id;
         }
 
-        public void CheckCollisions(float deltaTime)
+        public void CheckCollisions()
         {
             foreach (LockedWall lw in lockedWalls)
             {
@@ -323,6 +323,7 @@ namespace Platformer
             }
         }
 
+        //fix later
         public void RespawnWin()
         {
             foreach (TiledObjectGroup group in map.ObjectGroups)
@@ -339,8 +340,10 @@ namespace Platformer
             lives = 3;
             score += timer;
             timer = 500;
+            ResetLevel();
         }
 
+        //fix later
         public void RespawnDie()
         {
             foreach (TiledObjectGroup group in map.ObjectGroups)
@@ -363,6 +366,44 @@ namespace Platformer
                 lives = 3;
                 timer = 500;
                 score = 0;
+            }
+        }
+
+        //fix later
+        public void ResetLevel()
+        {
+            showKey = true;
+
+            enemies.Clear();
+            foreach (TiledObjectGroup group in map.ObjectGroups)
+            {
+                if (group.Name == "enemy_spawn")
+                {
+                    foreach (TiledObject obj in group.Objects)
+                    {
+                        Enemy enemy = new Enemy(this);
+                        enemy.Load(Content);
+                        enemy.Position = new Vector2(obj.X, obj.Y);
+                        enemies.Add(enemy);
+                        break;
+                    }
+                }
+            }
+
+            lockedWalls.Clear();
+            foreach (TiledObjectGroup group in map.ObjectGroups)
+            {
+                if (group.Name == "lock")
+                {
+                    foreach (TiledObject obj in group.Objects)
+                    {
+                        LockedWall lockedWall = new LockedWall(this);
+                        lockedWall.Load(Content);
+                        lockedWall.Position = new Vector2(obj.X, obj.Y);
+                        lockedWalls.Add(lockedWall);
+                        break;
+                    }
+                }
             }
         }
     }
