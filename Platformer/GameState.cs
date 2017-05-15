@@ -18,18 +18,17 @@ namespace Platformer
         Game1 game = null;
         bool isLoaded = false;
 
-        SpriteBatch spriteBatch;
         SpriteFont arialFont;
         SpriteFont ventureFont;
         Texture2D heart = null;
-        Goal goal = null;        Player player = null;        List<Enemy> enemies = new List<Enemy>();        Camera2D camera = null;
+        Goal goal = null;        Player player = null;        List<Enemy> enemies = new List<Enemy>();        List<LockedWall> lockedWalls = new List<LockedWall>();        Key key = null;        Camera2D camera = null;
         TiledMap map = null;
-        TiledMap mapBG = null;
         TiledTileLayer collisionLayer;
 
         float score = 0;
         float timer = 500;
         int lives = 3;
+        bool showKey = true;
         public static int tile = 32;
         public static float meter = tile;
         public static float gravity = meter * 9.8f * 4.0f;
@@ -48,6 +47,11 @@ namespace Platformer
             get { return game.GraphicsDevice.Viewport.Height; }
         }
 
+        public bool ShowKey
+        {
+            get { return showKey; }
+        }
+
 
         public GameState(Game1 game) : base()
         {
@@ -59,13 +63,10 @@ namespace Platformer
             if (isLoaded == false)
             {
                 isLoaded = true;
-                spriteBatch = new SpriteBatch(game.GraphicsDevice);
-
                 ventureFont = Content.Load<SpriteFont>("3Dventure");
                 arialFont = Content.Load<SpriteFont>("arial");
                 heart = Content.Load<Texture2D>("heart_x16");
                 map = Content.Load<TiledMap>("level1");
-                mapBG = Content.Load<TiledMap>("level1_back");
 
                 var viewportAdapter = new BoxingViewportAdapter(game.Window, game.GraphicsDevice, ScreenWidth, ScreenHeight);
                 camera = new Camera2D(viewportAdapter);
@@ -109,6 +110,25 @@ namespace Platformer
                             goal.Position = new Vector2(obj.X, obj.Y);
                         }
                     }
+
+                    if (group.Name == "key")
+                        foreach (TiledObject obj in group.Objects)
+                        {
+                            key = new Key(this);
+                            key.Load(Content);
+                            key.Position = new Vector2(obj.X, obj.Y);
+                        }
+
+                    if (group.Name == "lock")
+                    {
+                        foreach (TiledObject obj in group.Objects)
+                        {
+                            LockedWall lockedWall = new LockedWall(this);
+                            lockedWall.Load(Content);
+                            lockedWall.Position = new Vector2(obj.X, obj.Y);
+                            lockedWalls.Add(lockedWall);
+                        }
+                    }
                 }
             }
 
@@ -119,17 +139,17 @@ namespace Platformer
 
             timer -= deltaTime;
 
-            if (lives == 0)
-            {
-                lives = 3;
-            }
-
             CheckCollisions();
             goal.Update(deltaTime);
             player.Update(deltaTime);
+            key.Update(deltaTime);
             foreach (Enemy e in enemies)
             {
                 e.Update(deltaTime);
+            }
+            foreach (LockedWall lw in lockedWalls)
+            {
+                lw.Update(deltaTime);
             }
         }
 
@@ -138,14 +158,15 @@ namespace Platformer
             var transformMatrix = camera.GetViewMatrix();
 
             spriteBatch.Begin(transformMatrix: transformMatrix);
-            mapBG.Draw(spriteBatch);
             map.Draw(spriteBatch);
-            player.Draw(spriteBatch);
             goal.Draw(spriteBatch);
+            player.Draw(spriteBatch);
             foreach (Enemy e in enemies)
-            {
                 e.Draw(spriteBatch);
-            }
+            foreach (LockedWall lw in lockedWalls)
+                lw.Draw(spriteBatch);
+            if (showKey == true)
+                key.Draw(spriteBatch);
             spriteBatch.End();
 
             spriteBatch.Begin();
@@ -161,13 +182,7 @@ namespace Platformer
         public override void CleanUp()
         {
             isLoaded = false;
-            spriteBatch = null;
-            ventureFont = null;
-            arialFont = null;
-            heart = null;
-            map = null;
-            mapBG = null;
-            camera = null;
+
         }
 
 
@@ -202,6 +217,19 @@ namespace Platformer
 
         public void CheckCollisions()
         {
+            foreach (LockedWall lw in lockedWalls)
+            {
+                if (IsColliding(player.Bounds, lw.Bounds) == true)
+                {
+                    player.Stop();
+                }
+                if (showKey == false)
+                {
+                    lockedWalls.Remove(lw);
+                    break;
+                }
+            }
+
             foreach (Enemy e in enemies)
             {
                 if (IsColliding(player.Bounds, e.Bounds) == true)
@@ -218,6 +246,11 @@ namespace Platformer
                         RespawnDie();
                     }
                 }
+            }
+
+            if (IsColliding(player.Bounds, key.Bounds) == true)
+            {
+                showKey = false;
             }
 
             if (IsColliding(player.Bounds, goal.Bounds) == true)
@@ -280,6 +313,7 @@ namespace Platformer
             }
         }
 
+        //fix later
         public void RespawnWin()
         {
             foreach (TiledObjectGroup group in map.ObjectGroups)
@@ -296,8 +330,10 @@ namespace Platformer
             lives = 3;
             score += timer;
             timer = 500;
+            ResetLevel();
         }
 
+        //fix later
         public void RespawnDie()
         {
             foreach (TiledObjectGroup group in map.ObjectGroups)
@@ -314,6 +350,50 @@ namespace Platformer
             if (lives > 0)
             {
                 lives -= 1;
+            }
+            if (lives == 0)
+            {
+                lives = 3;
+                timer = 500;
+                score = 0;
+            }
+        }
+
+        //fix later
+        public void ResetLevel()
+        {
+            showKey = true;
+
+            enemies.Clear();
+            foreach (TiledObjectGroup group in map.ObjectGroups)
+            {
+                if (group.Name == "enemy_spawn")
+                {
+                    foreach (TiledObject obj in group.Objects)
+                    {
+                        Enemy enemy = new Enemy(this);
+                        enemy.Load(game.Content);
+                        enemy.Position = new Vector2(obj.X, obj.Y);
+                        enemies.Add(enemy);
+                        break;
+                    }
+                }
+            }
+
+            lockedWalls.Clear();
+            foreach (TiledObjectGroup group in map.ObjectGroups)
+            {
+                if (group.Name == "lock")
+                {
+                    foreach (TiledObject obj in group.Objects)
+                    {
+                        LockedWall lockedWall = new LockedWall(this);
+                        lockedWall.Load(game.Content);
+                        lockedWall.Position = new Vector2(obj.X, obj.Y);
+                        lockedWalls.Add(lockedWall);
+                        break;
+                    }
+                }
             }
         }
     }

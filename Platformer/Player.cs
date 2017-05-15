@@ -13,13 +13,12 @@ namespace Platformer
 {
     class Player
     {
-        Game1 game = null;
+        GameState game = null;
         Sprite walk = new Sprite();
         bool isFalling = true;
         bool isJumping = false;
         bool autoJump = true;
         bool allowMovement = true;
-        float timer = 0;
 
         Vector2 velocity = Vector2.Zero;
         Vector2 position = Vector2.Zero;
@@ -46,7 +45,7 @@ namespace Platformer
         }
 
 
-        public Player(Game1 game)
+        public Player(GameState game)
         {
             this.game = game;
             isFalling = true;
@@ -85,11 +84,11 @@ namespace Platformer
             bool wasMovingLeft = velocity.X < 0;
             bool wasMovingRight = velocity.X > 0;
             bool falling = isFalling;
-            Vector2 acceleration = new Vector2(0, Game1.gravity);
+            Vector2 acceleration = new Vector2(0, GameState.gravity);
 
             if (Keyboard.GetState().IsKeyDown(Keys.Left) && allowMovement == true)
             {
-                acceleration.X -= Game1.acceleration;
+                acceleration.X -= GameState.acceleration;
                 walk.SetFlipped(true);
                 walk.Play();
                 if (isJumping == true)
@@ -99,13 +98,13 @@ namespace Platformer
             }
             else if (wasMovingLeft == true)
             {
-                acceleration.X += Game1.friction;
+                acceleration.X += GameState.friction;
                 walk.Reset();
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right) && allowMovement == true)
             {
-                acceleration.X += Game1.acceleration;
+                acceleration.X += GameState.acceleration;
                 walk.SetFlipped(false);
                 walk.Play();
                 if (isJumping == true)
@@ -115,21 +114,21 @@ namespace Platformer
             }
             else if (wasMovingRight == true)
             {
-                acceleration.X -= Game1.friction;
+                acceleration.X -= GameState.friction;
                 walk.Reset();
             }
 
             if ((Keyboard.GetState().IsKeyDown(Keys.Up) && allowMovement == true && this.isJumping == false && falling == false) || autoJump == true)
             {
                 autoJump = false;
-                acceleration.Y -= Game1.jumpImpulse;
+                acceleration.Y -= GameState.jumpImpulse;
                 this.isJumping = true;
             }
 
             
             velocity += acceleration * deltaTime;
-            velocity.X = MathHelper.Clamp(velocity.X, -Game1.maxVelocity.X, Game1.maxVelocity.X);
-            velocity.Y = MathHelper.Clamp(velocity.Y, -Game1.maxVelocity.Y, Game1.maxVelocity.Y);
+            velocity.X = MathHelper.Clamp(velocity.X, -GameState.maxVelocity.X, GameState.maxVelocity.X);
+            velocity.Y = MathHelper.Clamp(velocity.Y, -GameState.maxVelocity.Y, GameState.maxVelocity.Y);
             walk.position += velocity * deltaTime;
 
             if ((wasMovingLeft && (velocity.X > 0)) || (wasMovingRight && (velocity.X < 0)))
@@ -140,8 +139,8 @@ namespace Platformer
 
             int tx = game.PixelToTile(walk.position.X);
             int ty = game.PixelToTile(walk.position.Y);
-            bool nx = (walk.position.X) % Game1.tile != 0;
-            bool ny = (walk.position.Y) % Game1.tile != 0;
+            bool nx = (walk.position.X) % GameState.tile != 0;
+            bool ny = (walk.position.Y) % GameState.tile != 0;
             bool cell = game.CellAtTileCoord(tx, ty) != 0;
             bool cellright = game.CellAtTileCoord(tx + 1, ty) != 0;
             bool celldown = game.CellAtTileCoord(tx, ty + 1) != 0;
@@ -193,7 +192,7 @@ namespace Platformer
         public void Stop()
         {
             if (velocity.X > 0)
-                velocity.X -= Game1.maxVelocity.X;
+                velocity.X -= GameState.maxVelocity.X;
         }
     }
 }

@@ -13,14 +13,14 @@ namespace Platformer
 {
     class Enemy
     {
-        Game1 game = null;
+        GameState game = null;
         Sprite sprite = new Sprite();
         Vector2 velocity = Vector2.Zero;
 
         float pause = 0;
         bool moveRight = true;
-        static float ghostAcceleration = Game1.acceleration / 5;
-        static Vector2 ghostMaxVelocity = Game1.maxVelocity / 5;
+        static float ghostAcceleration = GameState.acceleration / 5;
+        static Vector2 ghostMaxVelocity = GameState.maxVelocity / 5;
 
         public Vector2 Position
         {
@@ -33,7 +33,7 @@ namespace Platformer
             get { return sprite.Bounds; }
         }
 
-        public Enemy(Game1 game)
+        public Enemy(GameState game)
         {
             this.game = game;
             velocity = Vector2.Zero;
@@ -59,8 +59,8 @@ namespace Platformer
                 float ddx = 0;
                 int tx = game.PixelToTile(Position.X);
                 int ty = game.PixelToTile(Position.Y);
-                bool nx = (Position.X) % Game1.tile != 0;
-                bool ny = (Position.Y) % Game1.tile != 0;
+                bool nx = (Position.X) % GameState.tile != 0;
+                bool ny = (Position.Y) % GameState.tile != 0;
                 bool cell = game.CellAtTileCoord(tx, ty) != 0;
                 bool cellright = game.CellAtTileCoord(tx + 1, ty) != 0;
                 bool celldown = game.CellAtTileCoord(tx, ty + 1) != 0;

@@ -13,7 +13,7 @@ namespace Platformer
 {
     class Goal
     {
-        Game1 game = null;
+        GameState game = null;
         Sprite sprite = new Sprite();
 
         public Vector2 Position
@@ -27,7 +27,7 @@ namespace Platformer
             get { return sprite.Bounds; }
         }
 
-        public Goal(Game1 game)
+        public Goal(GameState game)
         {
             this.game = game;
         }

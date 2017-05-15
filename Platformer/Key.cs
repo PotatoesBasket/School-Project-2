@@ -12,7 +12,7 @@ namespace Platformer
 {
     class Key
     {
-        Game1 game = null;
+        GameState game = null;
         Sprite sprite = new Sprite();
 
         public Vector2 Position
@@ -26,7 +26,7 @@ namespace Platformer
             get { return sprite.Bounds; }
         }
 
-        public Key(Game1 game)
+        public Key(GameState game)
         {
             this.game = game;
         }

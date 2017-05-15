@@ -11,7 +11,7 @@ namespace Platformer
 {
     class LockedWall
     {
-        Game1 game = null;
+        GameState game = null;
         Sprite sprite = new Sprite();
 
         public Vector2 Position
@@ -26,7 +26,7 @@ namespace Platformer
         }
 
 
-        public LockedWall(Game1 game)
+        public LockedWall(GameState game)
         {
             this.game = game;
         }
