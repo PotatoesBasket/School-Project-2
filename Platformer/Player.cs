@@ -23,7 +23,7 @@ namespace Platformer
         Vector2 velocity = Vector2.Zero;
         Vector2 position = Vector2.Zero;
 
-        public Vector2 Posistion
+        public Vector2 Position
         {
             get { return walk.position; }
             set { walk.position = value; }

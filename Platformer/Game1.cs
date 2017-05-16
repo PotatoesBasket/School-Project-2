@@ -7,7 +7,7 @@ using MonoGame.Extended.ViewportAdapters;
 using System;
 using System.Collections.Generic;
 
-namespace Platformer
+namespace Platformer //aka "I Wanna Be The Super Meat Boy Ripoff"
 {
     public class Game1 : Game
     {

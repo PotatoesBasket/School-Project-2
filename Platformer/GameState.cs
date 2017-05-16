@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Maps.Tiled;
 using MonoGame.Extended.ViewportAdapters;
+using ParticleEffects;
 
 namespace Platformer
 {
@@ -21,7 +22,9 @@ namespace Platformer
         SpriteFont arialFont;
         SpriteFont ventureFont;
         Texture2D heart = null;
-        Goal goal = null;        Player player = null;        List<Enemy> enemies = new List<Enemy>();        List<LockedWall> lockedWalls = new List<LockedWall>();        Key key = null;        Camera2D camera = null;
+        Goal goal = null;        Player player = null;        List<Enemy> enemies = new List<Enemy>();        List<LockedWall> lockedWalls = new List<LockedWall>();        Key key = null;
+
+        Camera2D camera = null;
         TiledMap map = null;
         TiledTileLayer collisionLayer;
 
@@ -86,7 +89,7 @@ namespace Platformer
                         {
                             player = new Player(this);
                             player.Load(Content);
-                            player.Posistion = new Vector2(obj.X, obj.Y);
+                            player.Position = new Vector2(obj.X, obj.Y);
                         }
                     }
 
@@ -134,7 +137,7 @@ namespace Platformer
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            camera.Position = player.Posistion - new Vector2(ScreenWidth / 2, ScreenHeight / 1.5f);
+            camera.Position = player.Position - new Vector2(ScreenWidth / 2, ScreenHeight / 1.5f);
             CameraMechanics();
 
             timer -= deltaTime;
@@ -182,7 +185,7 @@ namespace Platformer
         public override void CleanUp()
         {
             isLoaded = false;
-
+            //do laterrrrr
         }
 
 
@@ -217,6 +220,7 @@ namespace Platformer
 
         public void CheckCollisions()
         {
+            GameOver();
             foreach (LockedWall lw in lockedWalls)
             {
                 if (IsColliding(player.Bounds, lw.Bounds) == true)
@@ -243,7 +247,20 @@ namespace Platformer
                     }
                     else
                     {
-                        RespawnDie();
+                        if (lives > 0)
+                        {
+                            lives -= 1;
+                            foreach (TiledObjectGroup group in map.ObjectGroups)
+                            {
+                                if (group.Name == "player_spawn")
+                                {
+                                    foreach (TiledObject obj in group.Objects)
+                                    {
+                                        player.Position = new Vector2(obj.X, obj.Y);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -275,8 +292,8 @@ namespace Platformer
             var cameraTop = camera.Position.Y;
             var cameraRight = camera.Position.X + ScreenWidth;
             var cameraBottom = camera.Position.Y + ScreenHeight;
-            var pX = player.Posistion.X - ScreenWidth / 2;
-            var pY = player.Posistion.Y - ScreenHeight / 1.5f;
+            var pX = player.Position.X - ScreenWidth / 2;
+            var pY = player.Position.Y - ScreenHeight / 1.5f;
 
             if (cameraLeft < 0 && cameraTop > 0 && cameraBottom < map.HeightInPixels)
             {
@@ -313,19 +330,9 @@ namespace Platformer
             }
         }
 
-        //fix later
         public void RespawnWin()
         {
-            foreach (TiledObjectGroup group in map.ObjectGroups)
-            {
-                if (group.Name == "player_spawn")
-                {
-                    foreach (TiledObject obj in group.Objects)
-                    {
-                        player.Posistion = new Vector2(obj.X, obj.Y);
-                    }
-                }
-            }
+            isLoaded = false;
 
             lives = 3;
             score += timer;
@@ -333,68 +340,23 @@ namespace Platformer
             ResetLevel();
         }
 
-        //fix later
-        public void RespawnDie()
+        public void GameOver()
         {
-            foreach (TiledObjectGroup group in map.ObjectGroups)
-            {
-                if (group.Name == "player_spawn")
-                {
-                    foreach (TiledObject obj in group.Objects)
-                    {
-                        player.Posistion = new Vector2(obj.X, obj.Y);
-                    }
-                }
-            }
-
-            if (lives > 0)
-            {
-                lives -= 1;
-            }
             if (lives == 0)
             {
+                isLoaded = false;
                 lives = 3;
                 timer = 500;
                 score = 0;
+                ResetLevel();
             }
         }
 
-        //fix later
         public void ResetLevel()
         {
             showKey = true;
-
             enemies.Clear();
-            foreach (TiledObjectGroup group in map.ObjectGroups)
-            {
-                if (group.Name == "enemy_spawn")
-                {
-                    foreach (TiledObject obj in group.Objects)
-                    {
-                        Enemy enemy = new Enemy(this);
-                        enemy.Load(game.Content);
-                        enemy.Position = new Vector2(obj.X, obj.Y);
-                        enemies.Add(enemy);
-                        break;
-                    }
-                }
-            }
-
             lockedWalls.Clear();
-            foreach (TiledObjectGroup group in map.ObjectGroups)
-            {
-                if (group.Name == "lock")
-                {
-                    foreach (TiledObject obj in group.Objects)
-                    {
-                        LockedWall lockedWall = new LockedWall(this);
-                        lockedWall.Load(game.Content);
-                        lockedWall.Position = new Vector2(obj.X, obj.Y);
-                        lockedWalls.Add(lockedWall);
-                        break;
-                    }
-                }
-            }
         }
     }
 }
