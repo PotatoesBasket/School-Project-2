@@ -32,6 +32,7 @@ namespace Platformer
         float timer = 500;
         int lives = 3;
         bool showKey = true;
+        bool allowMovement = true;
         public static int tile = 32;
         public static float meter = tile;
         public static float gravity = meter * 9.8f * 4.0f;
@@ -55,6 +56,11 @@ namespace Platformer
             get { return showKey; }
         }
 
+        public bool AllowMovement
+        {
+            get { return allowMovement; }
+        }
+
 
         public GameState(Game1 game) : base()
         {
@@ -69,7 +75,7 @@ namespace Platformer
                 ventureFont = Content.Load<SpriteFont>("3Dventure");
                 arialFont = Content.Load<SpriteFont>("arial");
                 heart = Content.Load<Texture2D>("heart_x16");
-                map = Content.Load<TiledMap>("level1");
+                map = Content.Load<TiledMap>("Level_1");
 
                 var viewportAdapter = new BoxingViewportAdapter(game.Window, game.GraphicsDevice, ScreenWidth, ScreenHeight);
                 camera = new Camera2D(viewportAdapter);
@@ -185,7 +191,6 @@ namespace Platformer
         public override void CleanUp()
         {
             isLoaded = false;
-            //do laterrrrr
         }
 
 

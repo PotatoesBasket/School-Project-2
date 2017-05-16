@@ -17,8 +17,7 @@ namespace Platformer
         Sprite walk = new Sprite();
         bool isFalling = true;
         bool isJumping = false;
-        bool autoJump = true;
-        bool allowMovement = true;
+        bool autoJump = false;
 
         Vector2 velocity = Vector2.Zero;
         Vector2 position = Vector2.Zero;
@@ -86,7 +85,7 @@ namespace Platformer
             bool falling = isFalling;
             Vector2 acceleration = new Vector2(0, GameState.gravity);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left) && allowMovement == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Left) && game.AllowMovement == true)
             {
                 acceleration.X -= GameState.acceleration;
                 walk.SetFlipped(true);
@@ -102,7 +101,7 @@ namespace Platformer
                 walk.Reset();
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Right) && allowMovement == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Right) && game.AllowMovement == true)
             {
                 acceleration.X += GameState.acceleration;
                 walk.SetFlipped(false);
@@ -118,7 +117,7 @@ namespace Platformer
                 walk.Reset();
             }
 
-            if ((Keyboard.GetState().IsKeyDown(Keys.Up) && allowMovement == true && this.isJumping == false && falling == false) || autoJump == true)
+            if ((Keyboard.GetState().IsKeyDown(Keys.Up) && game.AllowMovement == true && this.isJumping == false && falling == false) || autoJump == true)
             {
                 autoJump = false;
                 acceleration.Y -= GameState.jumpImpulse;

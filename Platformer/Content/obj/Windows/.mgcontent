@@ -12,10 +12,11 @@
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/ghost_walk_x48.png</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/player_stand_x48.png</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/jett_loaf_x48.png</File>
-    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/level1.tmx</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/key_x32.png</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/lock_x32.png</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/fire.png</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/spark.png</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/Level_1.tmx</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/test.tmx</File>
   </SourceFiles>
 </SourceFileCollection>

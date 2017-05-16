@@ -102,11 +102,6 @@
 /processorParam:TextureFormat=Color
 /build:jett_loaf_x48.png
 
-#begin level1.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:level1.tmx
-
 #begin key_x32.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -154,4 +149,14 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:spark.png
+
+#begin Level_1.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Level_1.tmx
+
+#begin test.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:test.tmx
 
