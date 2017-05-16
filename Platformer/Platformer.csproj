@@ -41,6 +41,7 @@
     <Compile Include="AnimatedTexture.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="GameOver.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Goal.cs" />
     <Compile Include="Key.cs" />

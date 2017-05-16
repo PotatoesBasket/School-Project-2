@@ -137,12 +137,14 @@ namespace Platformer
                     }
 
                     if (group.Name == "key")
+                    {
                         foreach (TiledObject obj in group.Objects)
                         {
                             key = new Key(this);
                             key.Load(Content);
                             key.Position = new Vector2(obj.X, obj.Y);
                         }
+                    }
 
                     if (group.Name == "lock")
                     {
@@ -271,6 +273,7 @@ namespace Platformer
                         if (lives > 0)
                         {
                             lives -= 1;
+                            timer = 500;
                             foreach (TiledObjectGroup group in map.ObjectGroups)
                             {
                                 if (group.Name == "player_spawn")
@@ -363,8 +366,6 @@ namespace Platformer
 
         public void RespawnWin()
         {
-            isLoaded = false;
-
             lives = 3;
             score += timer;
             timer = 500;
@@ -375,16 +376,17 @@ namespace Platformer
         {
             if (lives == 0)
             {
-                isLoaded = false;
                 lives = 3;
                 timer = 500;
                 score = 0;
                 ResetLevel();
+                AIE.StateManager.ChangeState("GameOver");
             }
         }
 
         public void ResetLevel()
         {
+            isLoaded = false;
             showKey = true;
             enemies.Clear();
             lockedWalls.Clear();

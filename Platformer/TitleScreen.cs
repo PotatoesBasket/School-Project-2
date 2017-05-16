@@ -14,6 +14,10 @@ namespace Platformer
     {
         Game1 game = null;
         SpriteFont font = null;
+        bool isLoaded = false;
+        bool start = true;
+        float buttonPressTimer = 0;
+        float buttonPressSpeed = 0.15f;
 
         public TitleScreen(Game1 game) : base()
         {
@@ -22,27 +26,56 @@ namespace Platformer
 
         public override void Update(ContentManager content, GameTime gameTime)
         {
-            if (font == null)
+            if (isLoaded == false)
             {
+                isLoaded = true;
                 font = content.Load<SpriteFont>("arial");
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            buttonPressTimer += deltaTime;
+            if (start == true)
             {
-                AIE.StateManager.ChangeState("GameState");
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
+                    AIE.StateManager.ChangeState("GameState");
+                if ((Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.Up)) && (buttonPressTimer > buttonPressSpeed))
+                {
+                    buttonPressTimer = 0;
+                    start = false;
+                }
+            }
+            else
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
+                    game.Exit();
+                if ((Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.Up)) && (buttonPressTimer > buttonPressSpeed))
+                {
+                    buttonPressTimer = 0;
+                    start = true;
+                }
             }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.DrawString(font, "TitleScreen", new Vector2(200, 200), Color.White);
+            spriteBatch.DrawString(font, "Unfinished: The Game", new Vector2(300, 150), Color.White);
+            if (start == true)
+            {
+                spriteBatch.DrawString(font, "start", new Vector2(350, 200), Color.White);
+                spriteBatch.DrawString(font, "exit", new Vector2(350, 225), Color.DimGray);
+            }
+            else
+            {
+                spriteBatch.DrawString(font, "start", new Vector2(350, 200), Color.DimGray);
+                spriteBatch.DrawString(font, "exit", new Vector2(350, 225), Color.White);
+            }
             spriteBatch.End();
         }
 
         public override void CleanUp()
         {
-            font = null;
+            isLoaded = false;
         }
     }
 }
