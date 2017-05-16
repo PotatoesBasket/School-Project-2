@@ -25,7 +25,7 @@ namespace Platformer
         Goal goal = null;        Player player = null;        List<Enemy> enemies = new List<Enemy>();        List<LockedWall> lockedWalls = new List<LockedWall>();        Key key = null;
 
         Camera2D camera = null;
-        TiledMap map = null;
+        TiledMap map;
         TiledTileLayer collisionLayer;
 
         float score = 0;
@@ -40,6 +40,13 @@ namespace Platformer
         public static float acceleration = maxVelocity.X * 2;
         public static float friction = maxVelocity.X * 6;
         public static float jumpImpulse = meter * 750;
+
+        enum Level
+        {
+            W1_L1,
+            W1_L2
+        }
+        Level level = Level.W1_L1;
 
         public int ScreenWidth
         {
@@ -69,13 +76,22 @@ namespace Platformer
 
         public override void Update(ContentManager Content, GameTime gameTime)
         {
+            switch (level)
+            {
+                case Level.W1_L1:
+                    map = Content.Load<TiledMap>("test");
+                    break;
+                case Level.W1_L2:
+                    map = Content.Load<TiledMap>("Level_1");
+                    break;
+            }
+
             if (isLoaded == false)
             {
                 isLoaded = true;
                 ventureFont = Content.Load<SpriteFont>("3Dventure");
                 arialFont = Content.Load<SpriteFont>("arial");
                 heart = Content.Load<Texture2D>("heart_x16");
-                map = Content.Load<TiledMap>("Level_1");
 
                 var viewportAdapter = new BoxingViewportAdapter(game.Window, game.GraphicsDevice, ScreenWidth, ScreenHeight);
                 camera = new Camera2D(viewportAdapter);
@@ -278,6 +294,16 @@ namespace Platformer
             if (IsColliding(player.Bounds, goal.Bounds) == true)
             {
                 RespawnWin();
+                ResetLevel();
+                switch (level)
+                {
+                    case Level.W1_L1:
+                        level = Level.W1_L2;
+                        break;
+                    case Level.W1_L2:
+                        level = Level.W1_L1;
+                        break;
+                }
             }
         }
 
