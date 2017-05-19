@@ -160,3 +160,10 @@
 /processor:TiledMapProcessor
 /build:test.tmx
 
+#begin funsize.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:funsize.spritefont
+

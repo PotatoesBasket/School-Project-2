@@ -13,7 +13,8 @@ namespace Platformer
     public class TitleScreen : AIE.State
     {
         Game1 game = null;
-        SpriteFont font = null;
+        SpriteFont arial = null;
+        SpriteFont funsize = null;
         bool isLoaded = false;
         bool start = true;
         float buttonPressTimer = 0;
@@ -29,7 +30,8 @@ namespace Platformer
             if (isLoaded == false)
             {
                 isLoaded = true;
-                font = content.Load<SpriteFont>("arial");
+                arial = content.Load<SpriteFont>("arial");
+                funsize = content.Load<SpriteFont>("funsize");
             }
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -58,17 +60,21 @@ namespace Platformer
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            game.GraphicsDevice.Clear(Color.White);
+
             spriteBatch.Begin();
-            spriteBatch.DrawString(font, "Unfinished: The Game", new Vector2(300, 150), Color.White);
+            spriteBatch.DrawString(funsize, "Unfinished:", new Vector2(300, 150), Color.Black);
+            spriteBatch.DrawString(funsize, "The Game", new Vector2(300, 190), Color.Black);
+
             if (start == true)
             {
-                spriteBatch.DrawString(font, "start", new Vector2(350, 200), Color.White);
-                spriteBatch.DrawString(font, "exit", new Vector2(350, 225), Color.DimGray);
+                spriteBatch.DrawString(arial, "start", new Vector2(350, 250), Color.Black);
+                spriteBatch.DrawString(arial, "exit", new Vector2(350, 275), Color.DimGray);
             }
             else
             {
-                spriteBatch.DrawString(font, "start", new Vector2(350, 200), Color.DimGray);
-                spriteBatch.DrawString(font, "exit", new Vector2(350, 225), Color.White);
+                spriteBatch.DrawString(arial, "start", new Vector2(350, 250), Color.DimGray);
+                spriteBatch.DrawString(arial, "exit", new Vector2(350, 275), Color.Black);
             }
             spriteBatch.End();
         }

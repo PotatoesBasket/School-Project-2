@@ -124,6 +124,12 @@ namespace Platformer
                 this.isJumping = true;
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Left) && Keyboard.GetState().IsKeyDown(Keys.Right) && this.isJumping == false)
+            {
+                velocity.X = 0;
+                walk.Reset();
+            }
+
             
             velocity += acceleration * deltaTime;
             velocity.X = MathHelper.Clamp(velocity.X, -GameState.maxVelocity.X, GameState.maxVelocity.X);
