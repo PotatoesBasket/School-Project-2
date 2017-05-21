@@ -20,6 +20,7 @@ namespace Platformer
     {
         Game1 game = null;
         bool isLoaded = false;
+        bool musicLoad = false;
 
         SpriteFont arialFont;
         SpriteFont ventureFont;
@@ -95,6 +96,7 @@ namespace Platformer
                     {
                         endGame = false;
                         allowMovement = true;
+                        MediaPlayer.Play(bgm);
                     }
                     break;
                 case Level.W1_L2:
@@ -109,20 +111,14 @@ namespace Platformer
             {
                 isLoaded = true;
                 ventureFont = Content.Load<SpriteFont>("3Dventure");
-                arialFont = Content.Load<SpriteFont>("arial");
                 psFont = Content.Load<SpriteFont>("ps2p");
-                bgm = Content.Load<Song>("alley cat");
+                bgm = Content.Load<Song>("sacrifice");
                 heart = Content.Load<Texture2D>("heart_x16");
                 spaghettiboi = Content.Load<Texture2D>("gamewon");
-                keyS = Content.Load<SoundEffect>("keys");
-                splat = Content.Load<SoundEffect>("splat");
-                keyInst = keyS.CreateInstance();
-                splatInst = splat.CreateInstance();
 
                 var viewportAdapter = new BoxingViewportAdapter(game.Window, game.GraphicsDevice, ScreenWidth, ScreenHeight);
                 camera = new Camera2D(viewportAdapter);
                 camera.Position = new Vector2(0, ScreenHeight);
-                MediaPlayer.Play(bgm);
 
                 foreach (TiledTileLayer layer in map.TileLayers)
                 {
@@ -186,6 +182,17 @@ namespace Platformer
                 }
             }
 
+            if (musicLoad == false)
+            {
+                musicLoad = true;
+                MediaPlayer.Play(bgm);
+            }
+
+            keyS = Content.Load<SoundEffect>("keys");
+            splat = Content.Load<SoundEffect>("splat");
+            keyInst = keyS.CreateInstance();
+            splatInst = splat.CreateInstance();
+
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             camera.Position = player.Position - new Vector2(ScreenWidth / 2, ScreenHeight / 1.5f);
@@ -243,6 +250,7 @@ namespace Platformer
         public override void CleanUp()
         {
             isLoaded = false;
+            musicLoad = false;
         }
 
 
@@ -341,7 +349,7 @@ namespace Platformer
                 }
             }
 
-            if (IsColliding(player.Bounds, key.Bounds) == true)
+            if (IsColliding(player.Bounds, key.Bounds) == true && showKey == true)
             {
                 keyInst.Play();
                 showKey = false;
@@ -360,11 +368,11 @@ namespace Platformer
                         level = Level.W1_L3;
                         break;
                     case Level.W1_L3:
-                        level = Level.W1_L1;
                         endGame = true;
                         allowMovement = false;
                         finalScore = score;
                         lives = 0;
+                        level = Level.W1_L1;
                         break;
                 }
             }
@@ -425,7 +433,8 @@ namespace Platformer
                 score = 0;
                 ResetLevel();
                 AIE.StateManager.ChangeState("GameOver");
-                MediaPlayer.Stop();
+                if (musicLoad == true)
+                    musicLoad = false;
             }
         }
 
@@ -435,6 +444,8 @@ namespace Platformer
             showKey = true;
             enemies.Clear();
             lockedWalls.Clear();
+            if (musicLoad == false)
+                musicLoad = true;
         }
     }
 }

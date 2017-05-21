@@ -54,7 +54,6 @@
     <Compile Include="Sprite.cs" />
     <Compile Include="StateManager.cs" />
     <Compile Include="TitleScreen.cs" />
-    <Compile Include="WinScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

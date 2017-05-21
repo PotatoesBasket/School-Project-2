@@ -18,6 +18,7 @@ namespace Platformer
         bool isFalling = true;
         bool isJumping = false;
         bool autoJump = false;
+        SoundEffect jump;
 
         Vector2 velocity = Vector2.Zero;
         Vector2 position = Vector2.Zero;
@@ -58,6 +59,7 @@ namespace Platformer
             AnimatedTexture walkAni = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
             walkAni.Load(content, "player_walk_x48", 4, 10);
             walk.Add(walkAni, 4, -10);
+            jump = content.Load<SoundEffect>("jump");
         }
 
         public void Update(float deltaTime)
@@ -122,6 +124,7 @@ namespace Platformer
                 autoJump = false;
                 acceleration.Y -= GameState.jumpImpulse;
                 this.isJumping = true;
+                jump.Play();
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Left) && Keyboard.GetState().IsKeyDown(Keys.Right) && this.isJumping == false)

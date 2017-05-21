@@ -63,17 +63,17 @@ namespace Platformer
             game.GraphicsDevice.Clear(Color.White);
 
             spriteBatch.Begin();
-            spriteBatch.DrawString(funsize, "Unfinished:", new Vector2(300, 150), Color.Black);
-            spriteBatch.DrawString(funsize, "The Game", new Vector2(300, 190), Color.Black);
+            spriteBatch.DrawString(funsize, "SUPER KITTY", new Vector2(300, 150), Color.Black);
+            spriteBatch.DrawString(funsize, "ADVENTURE", new Vector2(300, 190), Color.Black);
             if (start == true)
             {
-                spriteBatch.DrawString(ps2p, "START", new Vector2(365, 250), Color.Black);
-                spriteBatch.DrawString(ps2p, "EXIT", new Vector2(370, 275), Color.DimGray);
+                spriteBatch.DrawString(ps2p, "START", new Vector2(365, 270), Color.Black);
+                spriteBatch.DrawString(ps2p, "EXIT", new Vector2(370, 295), Color.DimGray);
             }
             else
             {
-                spriteBatch.DrawString(ps2p, "START", new Vector2(365, 250), Color.DimGray);
-                spriteBatch.DrawString(ps2p, "EXIT", new Vector2(370, 275), Color.Black);
+                spriteBatch.DrawString(ps2p, "START", new Vector2(365, 270), Color.DimGray);
+                spriteBatch.DrawString(ps2p, "EXIT", new Vector2(370, 295), Color.Black);
             }
             spriteBatch.End();
         }

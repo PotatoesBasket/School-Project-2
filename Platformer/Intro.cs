@@ -7,11 +7,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Media;
-using MonoGame.Extended;
-using MonoGame.Extended.Maps.Tiled;
-using MonoGame.Extended.ViewportAdapters;
 
 namespace Platformer
 {
@@ -20,12 +15,10 @@ namespace Platformer
         Game1 game = null;
         bool isLoaded = false;
         float timer = 0;
-
         SpriteFont font = null;
-        Texture2D bg = null;
-        Camera2D camera = null;
-        TiledMap map;
-        TiledMap map_effect;
+        SpriteFont font2 = null;
+        Texture2D kitty = null;
+        Texture2D grass = null;
 
         public Intro(Game1 game) : base()
         {
@@ -37,38 +30,30 @@ namespace Platformer
             if (isLoaded == false)
             {
                 isLoaded = true;
-                bg = content.Load<Texture2D>("moon");
-                map = content.Load<TiledMap>("intro_main");
-                map_effect = content.Load<TiledMap>("intro_effect");
-                font = content.Load<SpriteFont>("arial");
-
-                var viewportAdapter = new BoxingViewportAdapter(game.Window, game.GraphicsDevice, game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2);
-                camera = new Camera2D(viewportAdapter);
-                camera.Position = new Vector2(0, game.GraphicsDevice.Viewport.Height);
+                font = content.Load<SpriteFont>("visitor");
+                font2 = content.Load<SpriteFont>("ps2p");
+                kitty = content.Load<Texture2D>("kitty");
+                grass = content.Load<Texture2D>("grass");
             }
-
-            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            float deltaTime = (float)gameTime.ElapsedGameTime.Seconds;
             timer += deltaTime;
-            camera.Position = new Vector2(460, 570);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
                 AIE.StateManager.ChangeState("GameState");
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
-            spriteBatch.Draw(bg, new Vector2(0, -200), Color.White);
-            spriteBatch.End();
-
-            var transformMatrix = camera.GetViewMatrix();
-            spriteBatch.Begin(transformMatrix: transformMatrix);
-            map.Draw(spriteBatch);
-            map_effect.Draw(spriteBatch);
-            spriteBatch.End();
+            game.GraphicsDevice.Clear(Color.White);
 
             spriteBatch.Begin();
-            spriteBatch.DrawString(font, "press space to skip...", new Vector2(game.GraphicsDevice.Viewport.Width - 150, game.GraphicsDevice.Viewport.Height - 25), Color.White);
+            spriteBatch.Draw(grass, new Vector2(-300, -100), Color.White);
+            spriteBatch.Draw(kitty, new Vector2(375, 150), Color.White);
+            spriteBatch.DrawString(font, "Oh no!", new Vector2(140, 190), Color.Black);
+            spriteBatch.DrawString(font, "This adorable, precious kitty\n   just wandered into a\n     creepy factory.", new Vector2(40, 225), Color.Black);
+            spriteBatch.DrawString(font2, "press space to go save that floof-ball", new Vector2(100, 450), Color.Black);
             spriteBatch.End();
         }
 

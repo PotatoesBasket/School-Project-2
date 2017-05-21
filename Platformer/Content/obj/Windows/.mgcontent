@@ -5,7 +5,6 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/3Dventure.spritefont</File>
-    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/arial.spritefont</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/tileset32x32.png</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/heart_x16.png</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/player_walk_x48.png</File>
@@ -33,5 +32,10 @@
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/ps2p.spritefont</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/unused.tmx</File>
     <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/Level_3.tmx</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/jump.wav</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/jett_run_x1000.png</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/kitty.png</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/grass.jpg</File>
+    <File>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/visitor.spritefont</File>
   </SourceFiles>
 </SourceFileCollection>
