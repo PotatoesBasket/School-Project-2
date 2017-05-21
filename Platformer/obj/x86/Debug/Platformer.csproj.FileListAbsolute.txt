@@ -85,3 +85,19 @@ C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\W
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\Level_1.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\test.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\funsize.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\sacrifice.wma
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\sacrifice.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\keys.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\splat.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\intro_effect.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\intro_main.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\moon.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\jett_run_x48.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\Level_2.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\alley cat.wma
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\alley cat.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\gameover.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\gamewon.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\ps2p.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\unused.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\Level_3.xnb

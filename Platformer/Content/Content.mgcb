@@ -167,3 +167,107 @@
 /processorParam:TextureFormat=Compressed
 /build:funsize.spritefont
 
+#begin sacrifice.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sacrifice.mp3
+
+#begin keys.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:keys.wav
+
+#begin splat.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:splat.wav
+
+#begin intro_effect.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:intro_effect.tmx
+
+#begin intro_main.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:intro_main.tmx
+
+#begin moon.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:moon.jpg
+
+#begin jett_run_x48.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:jett_run_x48.png
+
+#begin Level_2.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Level_2.tmx
+
+#begin alley cat.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:alley cat.mp3
+
+#begin gameover.JPG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:gameover.JPG
+
+#begin gamewon.JPG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:gamewon.JPG
+
+#begin ps2p.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:ps2p.spritefont
+
+#begin unused.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:unused.tmx
+
+#begin Level_3.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Level_3.tmx
+

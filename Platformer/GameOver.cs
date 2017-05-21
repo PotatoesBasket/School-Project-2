@@ -15,6 +15,7 @@ namespace Platformer
         Game1 game = null;
         bool isLoaded = false;
         SpriteFont font = null;
+        Texture2D gameOver = null;
 
         public GameOver(Game1 game) : base()
         {
@@ -26,7 +27,8 @@ namespace Platformer
             if (isLoaded == false)
             {
                 isLoaded = true;
-                font = content.Load<SpriteFont>("arial");
+                font = content.Load<SpriteFont>("ps2p");
+                gameOver = content.Load<Texture2D>("gameover");
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
@@ -36,7 +38,9 @@ namespace Platformer
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.DrawString(font, "re-try?", new Vector2(350, 200), Color.White);
+            spriteBatch.Draw(gameOver, new Vector2(0, -10), Color.White);
+            spriteBatch.DrawString(font, "YOU DIED.", new Vector2(95, 300), Color.Red);
+            spriteBatch.DrawString(font, "kitty is disappoint", new Vector2(55, 330), Color.White);
             spriteBatch.End();
         }
 

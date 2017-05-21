@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended;
 using MonoGame.Extended.Maps.Tiled;
 using MonoGame.Extended.ViewportAdapters;
@@ -21,18 +23,26 @@ namespace Platformer
 
         SpriteFont arialFont;
         SpriteFont ventureFont;
+        SpriteFont psFont;
+        Song bgm;
+        SoundEffect keyS;
+        SoundEffect splat;
+        SoundEffectInstance keyInst;
+        SoundEffectInstance splatInst;
         Texture2D heart = null;
-        Goal goal = null;        Player player = null;        List<Enemy> enemies = new List<Enemy>();        List<LockedWall> lockedWalls = new List<LockedWall>();        Key key = null;
-
-        Camera2D camera = null;
+        Texture2D spaghettiboi = null;
+        Goal goal = null;        Player player = null;
+        Key key = null;        List<Enemy> enemies = new List<Enemy>();        List<LockedWall> lockedWalls = new List<LockedWall>();        Camera2D camera = null;
         TiledMap map;
         TiledTileLayer collisionLayer;
 
         float score = 0;
+        float finalScore = 0;
         float timer = 500;
         int lives = 3;
         bool showKey = true;
         bool allowMovement = true;
+        bool endGame = false;
         public static int tile = 32;
         public static float meter = tile;
         public static float gravity = meter * 9.8f * 4.0f;
@@ -44,7 +54,8 @@ namespace Platformer
         enum Level
         {
             W1_L1,
-            W1_L2
+            W1_L2,
+            W1_L3
         }
         Level level = Level.W1_L1;
 
@@ -79,10 +90,18 @@ namespace Platformer
             switch (level)
             {
                 case Level.W1_L1:
-                    map = Content.Load<TiledMap>("test");
+                    map = Content.Load<TiledMap>("Level_1");
+                    if (endGame == true && Keyboard.GetState().IsKeyDown(Keys.Enter))
+                    {
+                        endGame = false;
+                        allowMovement = true;
+                    }
                     break;
                 case Level.W1_L2:
-                    map = Content.Load<TiledMap>("Level_1");
+                    map = Content.Load<TiledMap>("Level_2");
+                    break;
+                case Level.W1_L3:
+                    map = Content.Load<TiledMap>("Level_3");
                     break;
             }
 
@@ -91,11 +110,19 @@ namespace Platformer
                 isLoaded = true;
                 ventureFont = Content.Load<SpriteFont>("3Dventure");
                 arialFont = Content.Load<SpriteFont>("arial");
+                psFont = Content.Load<SpriteFont>("ps2p");
+                bgm = Content.Load<Song>("alley cat");
                 heart = Content.Load<Texture2D>("heart_x16");
+                spaghettiboi = Content.Load<Texture2D>("gamewon");
+                keyS = Content.Load<SoundEffect>("keys");
+                splat = Content.Load<SoundEffect>("splat");
+                keyInst = keyS.CreateInstance();
+                splatInst = splat.CreateInstance();
 
                 var viewportAdapter = new BoxingViewportAdapter(game.Window, game.GraphicsDevice, ScreenWidth, ScreenHeight);
                 camera = new Camera2D(viewportAdapter);
                 camera.Position = new Vector2(0, ScreenHeight);
+                MediaPlayer.Play(bgm);
 
                 foreach (TiledTileLayer layer in map.TileLayers)
                 {
@@ -173,6 +200,7 @@ namespace Platformer
             foreach (Enemy e in enemies)
             {
                 e.Update(deltaTime);
+                e.ParticleUpdate(gameTime);
             }
             foreach (LockedWall lw in lockedWalls)
             {
@@ -202,6 +230,12 @@ namespace Platformer
             for (int i = 0; i < lives; i++)
             {
                 spriteBatch.Draw(heart, new Vector2(ScreenWidth - 30 - i * 20, 10), Color.White);
+            }
+            if (endGame == true)
+            {
+                spriteBatch.Draw(spaghettiboi, new Vector2(-50, -100), Color.White);
+                spriteBatch.DrawString(psFont, "You did it! Kitty is safe <3", new Vector2(325, 405), Color.White);
+                spriteBatch.DrawString(psFont, "Final Score: " + finalScore.ToString("f0"), new Vector2(350, 430), Color.White);
             }
             spriteBatch.End();
         }
@@ -244,6 +278,24 @@ namespace Platformer
         public void CheckCollisions()
         {
             GameOver();
+
+            if (player.Position.Y > map.HeightInPixels)
+            {
+                if (lives > 0)
+                {
+                    lives -= 1;
+                    foreach (TiledObjectGroup group in map.ObjectGroups)
+                    {
+                        if (group.Name == "player_spawn")
+                        {
+                            foreach (TiledObject obj in group.Objects)
+                            {
+                                player.Position = new Vector2(obj.X, obj.Y);
+                            }
+                        }
+                    }
+                }
+            }
             foreach (LockedWall lw in lockedWalls)
             {
                 if (IsColliding(player.Bounds, lw.Bounds) == true)
@@ -264,6 +316,7 @@ namespace Platformer
                     if (player.IsJumping && player.Velocity.Y > 0)
                     {
                         score += 10;
+                        splatInst.Play();
                         player.JumpOnCollision();
                         enemies.Remove(e);
                         break;
@@ -273,7 +326,6 @@ namespace Platformer
                         if (lives > 0)
                         {
                             lives -= 1;
-                            timer = 500;
                             foreach (TiledObjectGroup group in map.ObjectGroups)
                             {
                                 if (group.Name == "player_spawn")
@@ -291,6 +343,7 @@ namespace Platformer
 
             if (IsColliding(player.Bounds, key.Bounds) == true)
             {
+                keyInst.Play();
                 showKey = false;
             }
 
@@ -304,7 +357,14 @@ namespace Platformer
                         level = Level.W1_L2;
                         break;
                     case Level.W1_L2:
+                        level = Level.W1_L3;
+                        break;
+                    case Level.W1_L3:
                         level = Level.W1_L1;
+                        endGame = true;
+                        allowMovement = false;
+                        finalScore = score;
+                        lives = 0;
                         break;
                 }
             }
@@ -330,38 +390,21 @@ namespace Platformer
             var pY = player.Position.Y - ScreenHeight / 1.5f;
 
             if (cameraLeft < 0 && cameraTop > 0 && cameraBottom < map.HeightInPixels)
-            {
                 camera.Position = new Vector2(0, pY);
-            }
             if (cameraRight > map.WidthInPixels && cameraTop > 0 && cameraBottom < map.HeightInPixels)
-            {
                 camera.Position = new Vector2(map.WidthInPixels - ScreenWidth, pY);
-            }
             if (cameraTop < 0 && cameraLeft > 0 && cameraRight < map.WidthInPixels)
-            {
                 camera.Position = new Vector2(pX, 0);
-            }
             if (cameraBottom > map.HeightInPixels && cameraLeft > 0 && cameraRight < map.WidthInPixels)
-            {
                 camera.Position = new Vector2(pX, map.HeightInPixels - ScreenHeight);
-            }
-
             if (cameraLeft < 0 && cameraTop < 0)
-            {
                 camera.Position = new Vector2(0, 0);
-            }
             if (cameraLeft < 0 && cameraBottom > map.HeightInPixels)
-            {
                 camera.Position = new Vector2(0, map.HeightInPixels - ScreenHeight);
-            }
             if (cameraRight > map.WidthInPixels && cameraTop < 0)
-            {
                 camera.Position = new Vector2(map.WidthInPixels - ScreenWidth, 0);
-            }
             if (cameraRight > map.WidthInPixels && cameraBottom > map.HeightInPixels)
-            {
                 camera.Position = new Vector2(map.WidthInPixels - ScreenWidth, map.HeightInPixels - ScreenHeight);
-            }
         }
 
         public void RespawnWin()
@@ -374,13 +417,15 @@ namespace Platformer
 
         public void GameOver()
         {
-            if (lives == 0)
+            if (lives == 0 && endGame == false)
             {
+                level = Level.W1_L1;
                 lives = 3;
                 timer = 500;
                 score = 0;
                 ResetLevel();
                 AIE.StateManager.ChangeState("GameOver");
+                MediaPlayer.Stop();
             }
         }
 

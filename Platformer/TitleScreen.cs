@@ -13,7 +13,7 @@ namespace Platformer
     public class TitleScreen : AIE.State
     {
         Game1 game = null;
-        SpriteFont arial = null;
+        SpriteFont ps2p = null;
         SpriteFont funsize = null;
         bool isLoaded = false;
         bool start = true;
@@ -30,7 +30,7 @@ namespace Platformer
             if (isLoaded == false)
             {
                 isLoaded = true;
-                arial = content.Load<SpriteFont>("arial");
+                ps2p = content.Load<SpriteFont>("ps2p");
                 funsize = content.Load<SpriteFont>("funsize");
             }
 
@@ -39,7 +39,7 @@ namespace Platformer
             if (start == true)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
-                    AIE.StateManager.ChangeState("GameState");
+                    AIE.StateManager.ChangeState("Intro");
                 if ((Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.Up)) && (buttonPressTimer > buttonPressSpeed))
                 {
                     buttonPressTimer = 0;
@@ -65,16 +65,15 @@ namespace Platformer
             spriteBatch.Begin();
             spriteBatch.DrawString(funsize, "Unfinished:", new Vector2(300, 150), Color.Black);
             spriteBatch.DrawString(funsize, "The Game", new Vector2(300, 190), Color.Black);
-
             if (start == true)
             {
-                spriteBatch.DrawString(arial, "start", new Vector2(350, 250), Color.Black);
-                spriteBatch.DrawString(arial, "exit", new Vector2(350, 275), Color.DimGray);
+                spriteBatch.DrawString(ps2p, "START", new Vector2(365, 250), Color.Black);
+                spriteBatch.DrawString(ps2p, "EXIT", new Vector2(370, 275), Color.DimGray);
             }
             else
             {
-                spriteBatch.DrawString(arial, "start", new Vector2(350, 250), Color.DimGray);
-                spriteBatch.DrawString(arial, "exit", new Vector2(350, 275), Color.Black);
+                spriteBatch.DrawString(ps2p, "START", new Vector2(365, 250), Color.DimGray);
+                spriteBatch.DrawString(ps2p, "EXIT", new Vector2(370, 275), Color.Black);
             }
             spriteBatch.End();
         }

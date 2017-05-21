@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ParticleEffects;
 
 namespace Platformer
 {
@@ -16,6 +17,8 @@ namespace Platformer
         GameState game = null;
         Sprite sprite = new Sprite();
         Vector2 velocity = Vector2.Zero;
+        Emitter fireEmitter = null;
+        Texture2D fireTexture = null;
 
         float pause = 0;
         bool moveRight = true;
@@ -43,7 +46,10 @@ namespace Platformer
         {
             AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
             animation.Load(content, "ghost_walk_x48", 4, 5);
-            sprite.Add(animation, 0, 0);
+            sprite.Add(animation, -8, -10);
+
+            fireTexture = content.Load<Texture2D>("spark");
+            fireEmitter = new Emitter(fireTexture, Position);
         }
 
         public void Update(float deltaTime)
@@ -100,8 +106,17 @@ namespace Platformer
             }
         }
 
+        public void ParticleUpdate(GameTime gameTime)
+        {
+            fireEmitter.position = Position + new Vector2(22, 18);
+            fireEmitter.minVelocity = new Vector2(2, 2);
+            fireEmitter.maxVelocity = new Vector2(8, 8);
+            fireEmitter.Update(gameTime);
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
+            fireEmitter.Draw(spriteBatch);
             sprite.Draw(spriteBatch);
         }
     }

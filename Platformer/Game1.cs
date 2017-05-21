@@ -30,8 +30,10 @@ namespace Platformer //aka "I Wanna Be The Super Meat Boy Ripoff"
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             AIE.StateManager.CreateState("TitleScreen", new TitleScreen(this));
+            AIE.StateManager.CreateState("Intro", new Intro(this));
             AIE.StateManager.CreateState("GameState", new GameState(this));
             AIE.StateManager.CreateState("GameOver", new GameOver(this));
+            AIE.StateManager.CreateState("WinScreen", new WinScreen(this));
 
             AIE.StateManager.PushState("TitleScreen");
         }

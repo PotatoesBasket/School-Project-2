@@ -43,11 +43,11 @@ namespace ParticleEffects
             // CHANGE THESE VALUES TO EFFECT HOW THE EMITTER EMITTS PARTICLES
             //-----------------------------------------------------------------
             position = pos;      // starting position of the emitter
-            emissionRate = 1000.0f;
+            emissionRate = 500.0f;
             minLife = 0.5f;
-            maxLife = 3.0f;
+            maxLife = 1.0f;
             minSize = 8.0f;
-            maxSize = 32.0f;
+            maxSize = 30.0f;
             minVelocity.Y = -50.0f;
             maxVelocity.Y = 50.0f;
             minVelocity.X = -50.0f;
