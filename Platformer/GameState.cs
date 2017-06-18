@@ -40,8 +40,7 @@ namespace Platformer
         float timer = 500;
         int lives = 3;
         bool showKey = true;
-        bool allowMovement = true;
-        bool endGame = false;
+        bool gameWon = false;
         public static int tile = 32;
         public static float meter = tile;
         public static float gravity = meter * 9.8f * 4.0f;
@@ -73,11 +72,6 @@ namespace Platformer
             get { return showKey; }
         }
 
-        public bool AllowMovement
-        {
-            get { return allowMovement; }
-        }
-
         public GameState(Game1 game) : base()
         {
             this.game = game;
@@ -89,12 +83,6 @@ namespace Platformer
             {
                 case Level.W1_L1:
                     map = Content.Load<TiledMap>("Level_1");
-                    if (endGame == true && Keyboard.GetState().IsKeyDown(Keys.Enter))
-                    {
-                        endGame = false;
-                        allowMovement = true;
-                        MediaPlayer.Play(bgm);
-                    }
                     break;
                 case Level.W1_L2:
                     map = Content.Load<TiledMap>("Level_2");
@@ -371,11 +359,12 @@ namespace Platformer
                         level = Level.W1_L3;
                         break;
                     case Level.W1_L3:
-                        allowMovement = false;
+                        gameWon = true;
                         game.FinalScore = score;
-                        lives = 0;
+                        score = 0;
                         level = Level.W1_L1;
                         AIE.StateManager.ChangeState("GameWon");
+                        ResetLevel();
                         break;
                 }
             }
@@ -428,22 +417,26 @@ namespace Platformer
 
         public void GameOver()
         {
-            if (lives == 0 && endGame == false)
+            if (lives == 0)
             {
-                level = Level.W1_L1;
-                lives = 3;
-                timer = 500;
-                score = 0;
-                ResetLevel();
-                AIE.StateManager.ChangeState("GameOver");
-                if (musicLoad == true)
-                    musicLoad = false;
+                if (gameWon == false)
+                {
+                    level = Level.W1_L1;
+                    lives = 3;
+                    timer = 500;
+                    score = 0;
+                    AIE.StateManager.ChangeState("GameOver");
+                    if (musicLoad == true)
+                        musicLoad = false;
+                    ResetLevel();
+                }
             }
         }
 
         public void ResetLevel()
         {
             isLoaded = false;
+            gameWon = false;
             showKey = true;
             enemies.Clear();
             lockedWalls.Clear();
