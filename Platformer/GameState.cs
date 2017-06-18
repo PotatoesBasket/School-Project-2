@@ -31,14 +31,12 @@ namespace Platformer
         SoundEffectInstance keyInst;
         SoundEffectInstance splatInst;
         Texture2D heart = null;
-        Texture2D spaghettiboi = null;
         Goal goal = null;        Player player = null;
         Key key = null;        List<Enemy> enemies = new List<Enemy>();        List<LockedWall> lockedWalls = new List<LockedWall>();        Camera2D camera = null;
         TiledMap map;
         TiledTileLayer collisionLayer;
 
         float score = 0;
-        float finalScore = 0;
         float timer = 500;
         int lives = 3;
         bool showKey = true;
@@ -80,7 +78,6 @@ namespace Platformer
             get { return allowMovement; }
         }
 
-
         public GameState(Game1 game) : base()
         {
             this.game = game;
@@ -114,7 +111,6 @@ namespace Platformer
                 psFont = Content.Load<SpriteFont>("ps2p");
                 bgm = Content.Load<Song>("sacrifice");
                 heart = Content.Load<Texture2D>("heart_x16");
-                spaghettiboi = Content.Load<Texture2D>("gamewon");
 
                 var viewportAdapter = new BoxingViewportAdapter(game.Window, game.GraphicsDevice, ScreenWidth, ScreenHeight);
                 camera = new Camera2D(viewportAdapter);
@@ -213,6 +209,19 @@ namespace Platformer
             {
                 lw.Update(deltaTime);
             }
+
+            if (game.AllowInput && game.AllowMenu == true)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                {
+                    AIE.StateManager.PushState("PauseState");
+                    game.ResetInputTimer();
+                }
+            }
+
+            if (game.AllowMenu == false)
+                if (Keyboard.GetState().IsKeyUp(Keys.Enter))
+                    game.AllowMenu = true;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -237,12 +246,6 @@ namespace Platformer
             for (int i = 0; i < lives; i++)
             {
                 spriteBatch.Draw(heart, new Vector2(ScreenWidth - 30 - i * 20, 10), Color.White);
-            }
-            if (endGame == true)
-            {
-                spriteBatch.Draw(spaghettiboi, new Vector2(-50, -100), Color.White);
-                spriteBatch.DrawString(psFont, "You did it! Kitty is safe <3", new Vector2(325, 405), Color.White);
-                spriteBatch.DrawString(psFont, "Final Score: " + finalScore.ToString("f0"), new Vector2(350, 430), Color.White);
             }
             spriteBatch.End();
         }
@@ -368,11 +371,11 @@ namespace Platformer
                         level = Level.W1_L3;
                         break;
                     case Level.W1_L3:
-                        endGame = true;
                         allowMovement = false;
-                        finalScore = score;
+                        game.FinalScore = score;
                         lives = 0;
                         level = Level.W1_L1;
+                        AIE.StateManager.ChangeState("GameWon");
                         break;
                 }
             }

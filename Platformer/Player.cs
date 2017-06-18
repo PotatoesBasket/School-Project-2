@@ -18,6 +18,7 @@ namespace Platformer
         bool isFalling = true;
         bool isJumping = false;
         bool autoJump = false;
+        bool doubleJump = false;
         SoundEffect jump;
 
         Vector2 velocity = Vector2.Zero;
@@ -42,6 +43,11 @@ namespace Platformer
         public bool IsJumping
         {
             get { return isJumping; }
+        }
+
+        public bool IsFalling
+        {
+            get { return isFalling; }
         }
 
 
@@ -87,7 +93,7 @@ namespace Platformer
             bool falling = isFalling;
             Vector2 acceleration = new Vector2(0, GameState.gravity);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left) && game.AllowMovement == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Left) == true)
             {
                 acceleration.X -= GameState.acceleration;
                 walk.SetFlipped(true);
@@ -103,7 +109,7 @@ namespace Platformer
                 walk.Reset();
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Right) && game.AllowMovement == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Right) == true)
             {
                 acceleration.X += GameState.acceleration;
                 walk.SetFlipped(false);
@@ -119,7 +125,7 @@ namespace Platformer
                 walk.Reset();
             }
 
-            if ((Keyboard.GetState().IsKeyDown(Keys.Up) && game.AllowMovement == true && this.isJumping == false && falling == false) || autoJump == true)
+            if ((Keyboard.GetState().IsKeyDown(Keys.Up) == true && this.isJumping == false && falling == false) || autoJump == true)
             {
                 autoJump = false;
                 acceleration.Y -= GameState.jumpImpulse;

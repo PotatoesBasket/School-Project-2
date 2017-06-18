@@ -17,8 +17,6 @@ namespace Platformer
         SpriteFont funsize = null;
         bool isLoaded = false;
         bool start = true;
-        float buttonPressTimer = 0;
-        float buttonPressSpeed = 0.15f;
 
         public TitleScreen(Game1 game) : base()
         {
@@ -33,27 +31,30 @@ namespace Platformer
                 ps2p = content.Load<SpriteFont>("ps2p");
                 funsize = content.Load<SpriteFont>("funsize");
             }
-
-            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            buttonPressTimer += deltaTime;
-            if (start == true)
+            if (game.AllowInput == true)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
-                    AIE.StateManager.ChangeState("Intro");
-                if ((Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.Up)) && (buttonPressTimer > buttonPressSpeed))
+                if (start == true)
                 {
-                    buttonPressTimer = 0;
-                    start = false;
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
+                    {
+                        AIE.StateManager.ChangeState("Intro");
+                        game.ResetInputTimer();
+                    }
+                    if ((Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.Up)))
+                    {
+                        start = false;
+                        game.ResetInputTimer();
+                    }
                 }
-            }
-            else
-            {
-                if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
-                    game.Exit();
-                if ((Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.Up)) && (buttonPressTimer > buttonPressSpeed))
+                else
                 {
-                    buttonPressTimer = 0;
-                    start = true;
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
+                        game.Exit();
+                    if ((Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.Up)))
+                    {
+                        start = true;
+                        game.ResetInputTimer();
+                    }
                 }
             }
         }

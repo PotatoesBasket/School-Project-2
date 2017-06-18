@@ -10,14 +10,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Platformer
 {
-    class GameOver : AIE.State
+    class GameWon : AIE.State
     {
         Game1 game = null;
         bool isLoaded = false;
         SpriteFont font = null;
-        Texture2D gameOver = null;
+        Texture2D spaghettiboi = null;
 
-        public GameOver(Game1 game) : base()
+        public GameWon(Game1 game) : base()
         {
             this.game = game;
         }
@@ -28,7 +28,7 @@ namespace Platformer
             {
                 isLoaded = true;
                 font = content.Load<SpriteFont>("ps2p");
-                gameOver = content.Load<Texture2D>("gameover");
+                spaghettiboi = content.Load<Texture2D>("gamewon");
             }
 
             game.AllowMenu = false;
@@ -42,9 +42,9 @@ namespace Platformer
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(gameOver, new Vector2(0, -10), Color.White);
-            spriteBatch.DrawString(font, "YOU DIED.", new Vector2(95, 300), Color.Red);
-            spriteBatch.DrawString(font, "kitty is disappoint", new Vector2(55, 330), Color.White);
+            spriteBatch.Draw(spaghettiboi, new Vector2(-50, -100), Color.White);
+            spriteBatch.DrawString(font, "You did it! Kitty is safe <3", new Vector2(325, 405), Color.White);
+            spriteBatch.DrawString(font, "Final Score: " + game.FinalScore.ToString("f0"), new Vector2(350, 430), Color.White);
             spriteBatch.End();
         }
 

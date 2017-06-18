@@ -14,7 +14,6 @@ namespace Platformer
     {
         Game1 game = null;
         bool isLoaded = false;
-        float timer = 0;
         SpriteFont font = null;
         SpriteFont font2 = null;
         Texture2D kitty = null;
@@ -35,12 +34,13 @@ namespace Platformer
                 kitty = content.Load<Texture2D>("kitty");
                 grass = content.Load<Texture2D>("grass");
             }
-            float deltaTime = (float)gameTime.ElapsedGameTime.Seconds;
-            timer += deltaTime;
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (game.AllowInput == true)
             {
-                AIE.StateManager.ChangeState("GameState");
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                {
+                    AIE.StateManager.ChangeState("GameState");
+                    game.ResetInputTimer();
+                }
             }
         }
 
