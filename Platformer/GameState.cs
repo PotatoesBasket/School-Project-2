@@ -97,7 +97,7 @@ namespace Platformer
                 isLoaded = true;
                 ventureFont = Content.Load<SpriteFont>("3Dventure");
                 psFont = Content.Load<SpriteFont>("ps2p");
-                bgm = Content.Load<Song>("sacrifice");
+                //bgm = Content.Load<Song>("sacrifice");
                 heart = Content.Load<Texture2D>("heart_x16");
 
                 var viewportAdapter = new BoxingViewportAdapter(game.Window, game.GraphicsDevice, ScreenWidth, ScreenHeight);
@@ -169,7 +169,7 @@ namespace Platformer
             if (musicLoad == false)
             {
                 musicLoad = true;
-                MediaPlayer.Play(bgm);
+                //MediaPlayer.Play(bgm);
             }
 
             keyS = Content.Load<SoundEffect>("keys");
@@ -283,16 +283,7 @@ namespace Platformer
                 if (lives > 0)
                 {
                     lives -= 1;
-                    foreach (TiledObjectGroup group in map.ObjectGroups)
-                    {
-                        if (group.Name == "player_spawn")
-                        {
-                            foreach (TiledObject obj in group.Objects)
-                            {
-                                player.Position = new Vector2(obj.X, obj.Y);
-                            }
-                        }
-                    }
+                    ResetLevel();
                 }
             }
             foreach (LockedWall lw in lockedWalls)
@@ -325,16 +316,8 @@ namespace Platformer
                         if (lives > 0)
                         {
                             lives -= 1;
-                            foreach (TiledObjectGroup group in map.ObjectGroups)
-                            {
-                                if (group.Name == "player_spawn")
-                                {
-                                    foreach (TiledObject obj in group.Objects)
-                                    {
-                                        player.Position = new Vector2(obj.X, obj.Y);
-                                    }
-                                }
-                            }
+                            ResetLevel();
+                            break;
                         }
                     }
                 }
@@ -362,6 +345,7 @@ namespace Platformer
                         gameWon = true;
                         game.FinalScore = score;
                         score = 0;
+                        lives = 3;
                         level = Level.W1_L1;
                         AIE.StateManager.ChangeState("GameWon");
                         ResetLevel();
@@ -409,7 +393,6 @@ namespace Platformer
 
         public void RespawnWin()
         {
-            lives = 3;
             score += timer;
             timer = 500;
             ResetLevel();

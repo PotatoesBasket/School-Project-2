@@ -53,7 +53,7 @@ namespace Platformer
             spriteBatch.Draw(kitty, new Vector2(375, 150), Color.White);
             spriteBatch.DrawString(font, "Oh no!", new Vector2(140, 190), Color.Black);
             spriteBatch.DrawString(font, "This adorable, precious kitty\n   just wandered into a\n     creepy factory.", new Vector2(40, 225), Color.Black);
-            spriteBatch.DrawString(font2, "press space to go save that floof-ball", new Vector2(100, 450), Color.Black);
+            spriteBatch.DrawString(font2, "press enter to go save that floof-ball", new Vector2(100, 450), Color.Black);
             spriteBatch.End();
         }
 

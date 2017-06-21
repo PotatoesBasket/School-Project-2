@@ -53,6 +53,7 @@ namespace Platformer
 
             AIE.StateManager.CreateState("TitleScreen", new TitleScreen(this));
             AIE.StateManager.CreateState("Intro", new Intro(this));
+            AIE.StateManager.CreateState("LevelSelect", new LevelSelect(this));
             AIE.StateManager.CreateState("GameState", new GameState(this));
             AIE.StateManager.CreateState("GameOver", new GameOver(this));
             AIE.StateManager.CreateState("PauseState", new PauseState(this));
