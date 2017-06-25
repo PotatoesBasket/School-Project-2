@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/Level_2.tmx</SourceFile>
-  <SourceTime>2017-05-21T19:21:52.9359005+10:00</SourceTime>
-  <DestFile>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/bin/Windows/Level_2.xnb</DestFile>
-  <DestTime>2017-06-23T11:00:34.696203+10:00</DestTime>
+  <SourceFile>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/world1_ls.tmx</SourceFile>
+  <SourceTime>2017-06-21T15:19:40.9396117+10:00</SourceTime>
+  <DestFile>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/bin/Windows/world1_ls.xnb</DestFile>
+  <DestTime>2017-06-23T11:00:36.1289147+10:00</DestTime>
   <Importer>TiledMapImporter</Importer>
   <ImporterTime>2016-04-08T11:54:30+10:00</ImporterTime>
   <Processor>TiledMapProcessor</Processor>

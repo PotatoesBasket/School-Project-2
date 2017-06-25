@@ -5,7 +5,7 @@
  </tileset>
  <layer name="lamp" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztyDEJAAAIADAbWMD+Oa0gCIKwnYsAAADgizy4jTo4AACYaA/TANg=
+   eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
   </data>
  </layer>
  <layer name="grass" width="40" height="40">

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="32" tileheight="32" nextobjectid="2">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="32" tileheight="32" nextobjectid="8">
  <tileset firstgid="1" name="tileset32x32" tilewidth="32" tileheight="32" tilecount="169" columns="13">
   <image source="tileset32x32.png" trans="000000" width="416" height="416"/>
  </tileset>
- <layer name="collision" width="40" height="40">
+ <layer name="collision" width="40" height="40" opacity="0.98">
   <data encoding="base64" compression="zlib">
    eJztzsEJgDAQAMGzgdQRzVv7Ly1XQgJyKMzC/Deirp7OdKWxqDJ//vz58+fPnz9//vz58/ePvzs9m3/HxzUAAF41AaRXVOs=
   </data>
@@ -13,4 +13,15 @@
    eJztw7EJAAAIA7CC///sCR0EpwSSAAAAwN08BgCAZgFlWQBS
   </data>
  </layer>
+ <layer name="lamp" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztyDEJAAAIADAbWMD+Oa0gCIKwnYsAAADgizy4jTo4AACYaA/TANg=
+  </data>
+ </layer>
+ <objectgroup name="player_spawn">
+  <object id="5" x="204" y="750"/>
+ </objectgroup>
+ <objectgroup name="kitty_spawn">
+  <object id="6" x="236" y="759"/>
+ </objectgroup>
 </map>

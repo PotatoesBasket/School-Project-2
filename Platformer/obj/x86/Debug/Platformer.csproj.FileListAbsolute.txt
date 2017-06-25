@@ -106,3 +106,6 @@ C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\W
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\grass.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\terminal.xnb
 C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\visitor.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\world1_ls.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\fadein.xnb
+C:\Users\Faint\Documents\Visual Studio 2017\Projects\Platformer\Platformer\bin\Windows\x86\Debug\Content\fadeout.xnb

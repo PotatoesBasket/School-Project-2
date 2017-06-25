@@ -39,7 +39,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AnimatedTexture.cs" />
+    <Compile Include="Effect_FadeOut.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="Effect_FadeIn.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameOver.cs" />
     <Compile Include="GameState.cs" />
@@ -47,12 +49,14 @@
     <Compile Include="Goal.cs" />
     <Compile Include="Intro.cs" />
     <Compile Include="Key.cs" />
-    <Compile Include="LevelSelect.cs" />
+    <Compile Include="IntroCutscene.cs" />
     <Compile Include="LockedWall.cs" />
     <Compile Include="OptionsState.cs" />
     <Compile Include="ParticleSystem.cs" />
     <Compile Include="PauseState.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="Kitty_Cutscene.cs" />
+    <Compile Include="Player_Cutscene.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sprite.cs" />

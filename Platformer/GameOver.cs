@@ -35,7 +35,7 @@ namespace Platformer
 
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
             {
-                AIE.StateManager.ChangeState("GameState");
+                AIE.StateManager.ChangeState("TitleScreen");
                 game.ResetInputTimer();
             }
         }

@@ -12,7 +12,6 @@ using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended;
 using MonoGame.Extended.Maps.Tiled;
 using MonoGame.Extended.ViewportAdapters;
-using ParticleEffects;
 
 namespace Platformer
 {
@@ -303,7 +302,7 @@ namespace Platformer
             {
                 if (IsColliding(player.Bounds, e.Bounds) == true)
                 {
-                    if (player.IsJumping && player.Velocity.Y > 0)
+                    if (player.Velocity.Y > 0)
                     {
                         score += 10;
                         splatInst.Play();
