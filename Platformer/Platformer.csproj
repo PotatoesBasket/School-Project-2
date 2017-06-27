@@ -48,7 +48,6 @@
     <Compile Include="GameState.cs" />
     <Compile Include="GameWon.cs" />
     <Compile Include="Goal.cs" />
-    <Compile Include="Intro.cs" />
     <Compile Include="Key.cs" />
     <Compile Include="IntroCutscene.cs" />
     <Compile Include="LockedWall.cs" />

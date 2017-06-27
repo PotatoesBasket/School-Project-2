@@ -37,6 +37,9 @@ namespace Platformer
                 font04b = content.Load<SpriteFont>("funsize");
                 kitty = content.Load<Texture2D>("jett_run_x1000");
                 grass = content.Load<Texture2D>("grass");
+                aniTimer = 0;
+                runTimer = 0;
+                rotateTimer = 0;
             }
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             aniTimer += deltaTime;
@@ -58,6 +61,7 @@ namespace Platformer
                     {
                         AIE.StateManager.ChangeState("IntroCutscene");
                         game.ResetInputTimer();
+                        CleanUp();
                     }
                     if ((Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.Up)))
                     {

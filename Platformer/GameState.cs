@@ -91,9 +91,6 @@ namespace Platformer
                 case Level.W1_L3:
                     map = Content.Load<TiledMap>("Level_3");
                     break;
-                case Level.W2_L1:
-                    map = Content.Load<TiledMap>("Level_4");
-                    break;
             }
 
             if (isLoaded == false)
@@ -365,9 +362,6 @@ namespace Platformer
                         level = Level.W1_L3;
                         break;
                     case Level.W1_L3:
-                        level = Level.W2_L1;
-                        break;
-                    case Level.W2_L1:
                         gameWon = true;
                         game.FinalScore = score;
                         score = 0;

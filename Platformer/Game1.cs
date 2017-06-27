@@ -52,7 +52,6 @@ namespace Platformer
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             AIE.StateManager.CreateState("TitleScreen", new TitleScreen(this));
-            AIE.StateManager.CreateState("Intro", new Intro(this));
             AIE.StateManager.CreateState("IntroCutscene", new IntroCutscene(this));
             AIE.StateManager.CreateState("GameState", new GameState(this));
             AIE.StateManager.CreateState("GameOver", new GameOver(this));
