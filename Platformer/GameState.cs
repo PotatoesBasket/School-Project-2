@@ -21,7 +21,6 @@ namespace Platformer
         bool isLoaded = false;
         bool musicLoad = false;
 
-        SpriteFont arialFont;
         SpriteFont ventureFont;
         SpriteFont psFont;
         Song bgm;
@@ -31,7 +30,7 @@ namespace Platformer
         SoundEffectInstance splatInst;
         Texture2D heart = null;
         Goal goal = null;        Player player = null;
-        Key key = null;        List<Enemy> enemies = new List<Enemy>();        List<LockedWall> lockedWalls = new List<LockedWall>();        Camera2D camera = null;
+        Key key = null;        ExtraLife extralife = null;        List<Enemy> enemies = new List<Enemy>();        List<LockedWall> lockedWalls = new List<LockedWall>();        Camera2D camera = null;
         TiledMap map;
         TiledTileLayer collisionLayer;
 
@@ -39,6 +38,7 @@ namespace Platformer
         float timer = 500;
         int lives = 3;
         bool showKey = true;
+        bool show1up = true;
         bool gameWon = false;
         public static int tile = 32;
         public static float meter = tile;
@@ -46,13 +46,14 @@ namespace Platformer
         public static Vector2 maxVelocity = new Vector2(meter * 10, meter * 15);
         public static float acceleration = maxVelocity.X * 2;
         public static float friction = maxVelocity.X * 6;
-        public static float jumpImpulse = meter * 750;
+        public static float jumpImpulse = meter * 780;
 
         enum Level
         {
             W1_L1,
             W1_L2,
-            W1_L3
+            W1_L3,
+            W2_L1
         }
         Level level = Level.W1_L1;
 
@@ -71,6 +72,7 @@ namespace Platformer
             get { return showKey; }
         }
 
+
         public GameState(Game1 game) : base()
         {
             this.game = game;
@@ -88,6 +90,9 @@ namespace Platformer
                     break;
                 case Level.W1_L3:
                     map = Content.Load<TiledMap>("Level_3");
+                    break;
+                case Level.W2_L1:
+                    map = Content.Load<TiledMap>("Level_4");
                     break;
             }
 
@@ -162,6 +167,16 @@ namespace Platformer
                             lockedWalls.Add(lockedWall);
                         }
                     }
+
+                    if (group.Name == "extralife")
+                    {
+                        foreach (TiledObject obj in group.Objects)
+                        {
+                            extralife = new ExtraLife(this);
+                            extralife.Load(Content);
+                            extralife.Position = new Vector2(obj.X, obj.Y);
+                        }
+                    }
                 }
             }
 
@@ -187,6 +202,7 @@ namespace Platformer
             goal.Update(deltaTime);
             player.Update(deltaTime);
             key.Update(deltaTime);
+            extralife.Update(deltaTime);
             foreach (Enemy e in enemies)
             {
                 e.Update(deltaTime);
@@ -217,14 +233,16 @@ namespace Platformer
 
             spriteBatch.Begin(transformMatrix: transformMatrix);
             map.Draw(spriteBatch);
-            goal.Draw(spriteBatch);
             player.Draw(spriteBatch);
+            goal.Draw(spriteBatch);
             foreach (Enemy e in enemies)
                 e.Draw(spriteBatch);
             foreach (LockedWall lw in lockedWalls)
                 lw.Draw(spriteBatch);
             if (showKey == true)
                 key.Draw(spriteBatch);
+            if (show1up == true)
+                extralife.Draw(spriteBatch);
             spriteBatch.End();
 
             spriteBatch.Begin();
@@ -328,6 +346,12 @@ namespace Platformer
                 showKey = false;
             }
 
+            if (IsColliding(player.Bounds, extralife.Bounds) == true && show1up == true)
+            {
+                show1up = false;
+                lives += 1;
+            }
+
             if (IsColliding(player.Bounds, goal.Bounds) == true)
             {
                 RespawnWin();
@@ -341,6 +365,9 @@ namespace Platformer
                         level = Level.W1_L3;
                         break;
                     case Level.W1_L3:
+                        level = Level.W2_L1;
+                        break;
+                    case Level.W2_L1:
                         gameWon = true;
                         game.FinalScore = score;
                         score = 0;
@@ -420,6 +447,7 @@ namespace Platformer
             isLoaded = false;
             gameWon = false;
             showKey = true;
+            show1up = true;
             enemies.Clear();
             lockedWalls.Clear();
             if (musicLoad == false)

@@ -5,7 +5,12 @@
  </tileset>
  <layer name="collision" width="40" height="40" opacity="0.98">
   <data encoding="base64" compression="zlib">
-   eJztzsEJgDAQAMGzgdQRzVv7Ly1XQgJyKMzC/Deirp7OdKWxqDJ//vz58+fPnz9//vz58/ePvzs9m3/HxzUAAF41AaRXVOs=
+   eJztzjEOgCAQAEH8AO9AqJX//8zraDUx5IrZZPotZV8tnKGH8dLO/Pnz58+fP3/+/Pnz58/f+puJ/65wf/w7kqsAAPzqATvGVPk=
+  </data>
+ </layer>
+ <layer name="transparencyfix" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzrsRABAUAEHl+MTovzMvk4oQ7M1cvindK8clrnE7/GZ8fHx8fHx8fHx8fHx82zc/9vV4fOyTJEnS+xaeMjQB
   </data>
  </layer>
  <layer name="grass" width="40" height="40">

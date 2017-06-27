@@ -20,7 +20,6 @@ namespace Platformer
         enum optionsCursor
         {
             _sounds,
-            _levelselect,
             _back
         }
         optionsCursor oc = optionsCursor._sounds;
@@ -36,6 +35,7 @@ namespace Platformer
             {
                 isLoaded = true;
                 font = content.Load<SpriteFont>("ps2p");
+                oc = optionsCursor._sounds;
             }
 
             if (game.AllowInput == true)
@@ -45,9 +45,6 @@ namespace Platformer
                     switch (oc)
                     {
                         case optionsCursor._sounds:
-                            oc = optionsCursor._levelselect;
-                            break;
-                        case optionsCursor._levelselect:
                             oc = optionsCursor._back;
                             break;
                         case optionsCursor._back:
@@ -64,11 +61,8 @@ namespace Platformer
                         case optionsCursor._sounds:
                             oc = optionsCursor._back;
                             break;
-                        case optionsCursor._levelselect:
-                            oc = optionsCursor._sounds;
-                            break;
                         case optionsCursor._back:
-                            oc = optionsCursor._levelselect;
+                            oc = optionsCursor._sounds;
                             break;
                     }
                     game.ResetInputTimer();
@@ -91,6 +85,7 @@ namespace Platformer
                 {
                     AIE.StateManager.ChangeState("PauseState");
                     game.ResetInputTimer();
+                    CleanUp();
                 }
             }
         }
@@ -105,15 +100,10 @@ namespace Platformer
                 spriteBatch.DrawString(font, "sounds", new Vector2(55, 330), Color.White);
             else
                 spriteBatch.DrawString(font, "sounds", new Vector2(55, 330), Color.DimGray);
-                         if (oc == optionsCursor._levelselect)
-                spriteBatch.DrawString(font, "level select", new Vector2(55, 350), Color.White);
-            else
-                spriteBatch.DrawString(font, "level select", new Vector2(55, 350), Color.DimGray);
-
             if (oc == optionsCursor._back)
-                spriteBatch.DrawString(font, "back", new Vector2(55, 370), Color.White);
+                spriteBatch.DrawString(font, "back", new Vector2(55, 350), Color.White);
             else
-                spriteBatch.DrawString(font, "back", new Vector2(55, 370), Color.DimGray);
+                spriteBatch.DrawString(font, "back", new Vector2(55, 350), Color.DimGray);
 
             if (soundOn == true)
             {

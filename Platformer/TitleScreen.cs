@@ -14,7 +14,12 @@ namespace Platformer
     {
         Game1 game = null;
         SpriteFont ps2p = null;
-        SpriteFont funsize = null;
+        SpriteFont font04b = null;
+        Texture2D kitty = null;
+        Texture2D grass = null;
+        float aniTimer = 0f;
+        float runTimer = 0f;
+        float rotateTimer = 0f;
         bool isLoaded = false;
         bool start = true;
 
@@ -29,8 +34,22 @@ namespace Platformer
             {
                 isLoaded = true;
                 ps2p = content.Load<SpriteFont>("ps2p");
-                funsize = content.Load<SpriteFont>("funsize");
+                font04b = content.Load<SpriteFont>("funsize");
+                kitty = content.Load<Texture2D>("jett_run_x1000");
+                grass = content.Load<Texture2D>("grass");
             }
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            aniTimer += deltaTime;
+            runTimer += deltaTime * 4;
+            rotateTimer += deltaTime * 1.5f;
+
+            if (aniTimer > 1)
+                aniTimer = 0;
+            if (runTimer > 1)
+                runTimer = 0;
+            if (rotateTimer > 360)
+                rotateTimer = 0;
+
             if (game.AllowInput == true)
             {
                 if (start == true)
@@ -64,17 +83,30 @@ namespace Platformer
             game.GraphicsDevice.Clear(Color.White);
 
             spriteBatch.Begin();
-            spriteBatch.DrawString(funsize, "SUPER KITTY", new Vector2(300, 150), Color.Black);
-            spriteBatch.DrawString(funsize, "ADVENTURE", new Vector2(300, 190), Color.Black);
+            spriteBatch.Draw(grass, new Vector2(-300, -100), Color.White);
+            if (runTimer >= 0 && runTimer < 0.5f)
+                spriteBatch.Draw(kitty, new Vector2(410, 700), null, new Rectangle(0, 0, 360, 300), new Vector2(200, 800), rotateTimer - 90, new Vector2(.5f, .5f), Color.White, SpriteEffects.None, 0);
+            if (runTimer > 0.5f && runTimer <= 1)
+                spriteBatch.Draw(kitty, new Vector2(410, 700), null, new Rectangle(360, 0, 360, 300), new Vector2(200, 800), rotateTimer - 90, new Vector2(.5f, .5f), Color.White, SpriteEffects.None, 0);
+            if (aniTimer >= 0 && aniTimer < 0.5f)
+            {
+                spriteBatch.DrawString(font04b, "SUPER KITTY", new Vector2(225, 100), Color.DeepPink);
+                spriteBatch.DrawString(font04b, "ADVENTURE", new Vector2(250, 140), Color.DeepPink);
+            }
+            if (aniTimer > 0.5f && aniTimer <= 1)
+            {
+                spriteBatch.DrawString(font04b, "SUPER KITTY", new Vector2(225, 103), Color.DeepPink);
+                spriteBatch.DrawString(font04b, "ADVENTURE", new Vector2(250, 143), Color.DeepPink);
+            }
             if (start == true)
             {
-                spriteBatch.DrawString(ps2p, "START", new Vector2(365, 270), Color.Black);
-                spriteBatch.DrawString(ps2p, "EXIT", new Vector2(370, 295), Color.DimGray);
+                spriteBatch.DrawString(ps2p, "START!", new Vector2(375, 230), Color.Yellow);
+                spriteBatch.DrawString(ps2p, "EXIT", new Vector2(380, 255), Color.DimGray);
             }
             else
             {
-                spriteBatch.DrawString(ps2p, "START", new Vector2(365, 270), Color.DimGray);
-                spriteBatch.DrawString(ps2p, "EXIT", new Vector2(370, 295), Color.Black);
+                spriteBatch.DrawString(ps2p, "START", new Vector2(375, 230), Color.DimGray);
+                spriteBatch.DrawString(ps2p, "EXIT!", new Vector2(380, 255), Color.Yellow);
             }
             spriteBatch.End();
         }

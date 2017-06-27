@@ -145,7 +145,13 @@ namespace Platformer
             }
             else
             {
-                spriteBatch.DrawString(font, "test test", new Vector2(100, 100), Color.Red);
+                spriteBatch.DrawString(font, "CONTROLS", new Vector2(350, 160), Color.Red);
+                spriteBatch.DrawString(font, "left/right", new Vector2(220, 190), Color.White);
+                spriteBatch.DrawString(font, "MOVE", new Vector2(450, 190), Color.White);
+                spriteBatch.DrawString(font, "up/spacebar", new Vector2(220, 210), Color.White);
+                spriteBatch.DrawString(font, "JUMP", new Vector2(450, 210), Color.White);
+                spriteBatch.DrawString(font, "enter", new Vector2(220, 230), Color.White);
+                spriteBatch.DrawString(font, "PAUSE/SELECT", new Vector2(450, 230), Color.White);
             }
 
             spriteBatch.End();

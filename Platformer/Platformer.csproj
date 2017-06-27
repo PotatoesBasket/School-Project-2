@@ -42,6 +42,7 @@
     <Compile Include="Effect_FadeOut.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Effect_FadeIn.cs" />
+    <Compile Include="ExtraLife.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameOver.cs" />
     <Compile Include="GameState.cs" />

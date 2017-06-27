@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="12">
+ <tileset firstgid="1" name="tileset32x32" tilewidth="32" tileheight="32" tilecount="169" columns="13">
+  <image source="tileset32x32.png" trans="000000" width="416" height="416"/>
+ </tileset>
+ <layer name="not_collision" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztz7ENAEAIA7EU7D8zFSs86OVI7nOVpAAAAAAAAOCA2fYPHQAA78y2f+j4QwO01ibx
+  </data>
+ </layer>
+ <layer name="collision" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0UEKgDAMRNGu6v1vrEsRGg2kThJ+4W3swvl0jjEmAAAAAFyOBBsAAAAAYDfrqLd17/Ae9d6Ihgodqzv1Rk+H9y4ba2e1jg7vYb1JpY4u7/HW4O38+m3Xe9z/tTqZO567rY7o82dXlQ7lv1Ud6q0RHeqdUW3qTZYTd0o2Vg==
+  </data>
+ </layer>
+ <objectgroup name="player_spawn">
+  <object id="5" x="384.848" y="1115.15"/>
+ </objectgroup>
+ <objectgroup name="enemy_spawn">
+  <object id="1" x="900" y="1442.42"/>
+  <object id="2" x="736.364" y="1442.42"/>
+  <object id="3" x="572.727" y="1442.42"/>
+ </objectgroup>
+ <objectgroup name="key">
+  <object id="4" x="990.909" y="1445.45"/>
+ </objectgroup>
+ <objectgroup name="lock">
+  <object id="7" x="166.667" y="1478.79"/>
+  <object id="8" x="163.636" y="1506.06"/>
+  <object id="9" x="163.636" y="1533.33"/>
+ </objectgroup>
+ <objectgroup name="extralife">
+  <object id="11" x="124.242" y="1415.15"/>
+ </objectgroup>
+ <objectgroup name="goal">
+  <object id="6" x="100" y="1539.39"/>
+ </objectgroup>
+</map>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/funsize.spritefont</SourceFile>
-  <SourceTime>2017-05-18T20:03:43.6301387+10:00</SourceTime>
+  <SourceTime>2017-06-27T13:57:58.2525673+10:00</SourceTime>
   <DestFile>C:/Users/Faint/Documents/Visual Studio 2017/Projects/Platformer/Platformer/Content/bin/Windows/funsize.xnb</DestFile>
-  <DestTime>2017-06-23T11:00:32.8309871+10:00</DestTime>
+  <DestTime>2017-06-27T13:58:03.9682432+10:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2017-03-02T01:05:36+10:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

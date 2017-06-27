@@ -342,3 +342,8 @@
 /processorParam:TextureFormat=Color
 /build:fadeout.png
 
+#begin Level_4.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Level_4.tmx
+

@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Platformer
 {
-    class Key
+    class ExtraLife
     {
         GameState game = null;
         Sprite sprite = new Sprite();
@@ -26,15 +26,15 @@ namespace Platformer
             get { return sprite.Bounds; }
         }
 
-        public Key(GameState game)
+        public ExtraLife(GameState game)
         {
             this.game = game;
         }
 
         public void Load(ContentManager content)
         {
-            AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
-            animation.Load(content, "key_x32", 1, 1);
+            AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 2, 1);
+            animation.Load(content, "heart_x16", 1, 1);
             sprite.Add(animation, 0, 0);
         }
 
